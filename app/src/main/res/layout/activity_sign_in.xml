@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".views.SignInActivity">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+      android:id="@+id/titleLabel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Ingresa tu numero de folio"
+      android:textSize="24sp" />
+
+    <TextView
+      android:id="@+id/subtitleLabel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="para iniciar sesion"
+      android:textSize="24sp" />
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+
+      <EditText
+        android:id="@+id/codeFirstDigitInput"
+        android:layout_width="29dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:maxLength="1" />
+
+      <EditText
+        android:id="@+id/codeSecondDigitInput"
+        android:layout_width="29dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:maxLength="1" />
+
+      <EditText
+        android:id="@+id/codeThirdDigitInput"
+        android:layout_width="29dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:maxLength="1" />
+
+      <EditText
+        android:id="@+id/codeFourthDigitInput"
+        android:layout_width="29dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:maxLength="1" />
+
+      <EditText
+        android:id="@+id/codeFifthDigitInput"
+        android:layout_width="29dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:maxLength="1" />
+
+    </LinearLayout>
+
+    <Button
+      android:id="@+id/signInButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="INGRESAR" />
+
+  </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

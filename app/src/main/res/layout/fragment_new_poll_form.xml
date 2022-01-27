@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".fragments.NewPollFormFragment">
+
+  <!-- TODO: Update blank fragment layout -->
+
+  <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <EditText
+        android:id="@+id/etElectorKey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Clave de elector"
+        android:inputType="textPersonName" />
+
+      <EditText
+        android:id="@+id/etCurp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="CURP*"
+        android:inputType="textPersonName" />
+
+      <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Nombre*"
+        android:inputType="textPersonName" />
+
+      <EditText
+        android:id="@+id/etSurname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Apellido Paterno*"
+        android:inputType="textPersonName" />
+
+      <EditText
+        android:id="@+id/etSecondSurname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Apellido Materno*"
+        android:inputType="textPersonName" />
+
+      <EditText
+        android:id="@+id/etBirthDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Fecha de nacimiento* DD/MM/AAAA"
+        android:inputType="datetime" />
+
+      <EditText
+        android:id="@+id/etBirthPlace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Lugar de nacimiento*"
+        android:inputType="textPersonName" />
+
+      <EditText
+        android:id="@+id/etIneExp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Vigencia del INE* AAAA"
+        android:inputType="number" />
+
+      <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Genero:" />
+
+      <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <RadioButton
+          android:id="@+id/rMale"
+          android:layout_width="130dp"
+          android:layout_height="wrap_content"
+          android:text="Masculino" />
+
+        <RadioButton
+          android:id="@+id/rFemale"
+          android:layout_width="130dp"
+          android:layout_height="wrap_content"
+          android:text="Femenino" />
+      </RadioGroup>
+
+      <EditText
+        android:id="@+id/etZipCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Codigo Postal*"
+        android:inputType="number" />
+
+      <EditText
+        android:id="@+id/etSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="none"
+        android:hint="Seccion*"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:focusable="false"
+        android:background="@android:drawable/editbox_background" />
+
+      <EditText
+        android:id="@+id/etColony"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Colonia*"
+        android:inputType="text" />
+
+      <EditText
+        android:id="@+id/etStreet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Calle*"
+        android:inputType="text" />
+
+      <EditText
+        android:id="@+id/etExtNum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Numero exterior*"
+        android:inputType="text" />
+
+      <EditText
+        android:id="@+id/etIntNum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Numero interior*"
+        android:inputType="text" />
+
+    </LinearLayout>
+  </ScrollView>
+
+</FrameLayout>
