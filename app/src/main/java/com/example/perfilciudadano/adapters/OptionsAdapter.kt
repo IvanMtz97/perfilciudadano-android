@@ -37,6 +37,7 @@ class OptionsAdapter(context: Context, var resources: Int, options: List<Option>
     return object : Filter() {
       override fun publishResults(charSequence: CharSequence?, filterResults: FilterResults?) {
         allOptions = filterResults?.values as List<Option>
+        // TODO: Show all the options when charSequence is "" or there are no filtered results
         notifyDataSetChanged()
       }
 

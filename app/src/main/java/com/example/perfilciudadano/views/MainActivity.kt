@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
     this.supportActionBar?.hide()
-    val intent = Intent(this, NewPollActivity::class.java)
+    val intent = Intent(this, SignInActivity::class.java)
     finish()
     startActivity(intent)
   }

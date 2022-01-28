@@ -12,7 +12,7 @@
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.35353535353535354" />
         <entry key="app/src/main/res/layout/content_new_poll.xml" value="0.17477203647416414" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.15670289855072464" />
-        <entry key="app/src/main/res/layout/fragment_new_poll_form.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_new_poll_form.xml" value="0.1" />
         <entry key="app/src/main/res/layout/option_layout.xml" value="0.375" />
         <entry key="app/src/main/res/layout/searchable_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/signin.xml" value="0.34479166666666666" />
