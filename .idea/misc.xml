@@ -11,11 +11,14 @@
         <entry key="app/src/main/res/layout/activity_operator_home.xml" value="0.3279205272763766" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.35353535353535354" />
         <entry key="app/src/main/res/layout/content_new_poll.xml" value="0.17477203647416414" />
+        <entry key="app/src/main/res/layout/dismissable_unsearchable_list.xml" value="0.25253292806484295" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.15670289855072464" />
-        <entry key="app/src/main/res/layout/fragment_new_poll_form.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_new_poll_form.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/fragment_option_with_other.xml" value="0.21467391304347827" />
         <entry key="app/src/main/res/layout/option_layout.xml" value="0.375" />
         <entry key="app/src/main/res/layout/searchable_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/signin.xml" value="0.34479166666666666" />
+        <entry key="app/src/main/res/layout/unsearchable_list.xml" value="0.3375" />
       </map>
     </option>
   </component>

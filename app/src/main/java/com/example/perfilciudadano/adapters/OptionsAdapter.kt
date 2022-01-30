@@ -17,7 +17,7 @@ class OptionsAdapter(context: Context, var resources: Int, options: List<Option>
     val layoutInflater = LayoutInflater.from(context)
     val view = layoutInflater.inflate(resources, null)
     val label = view.findViewById<TextView>(R.id.optionLabel)
-    label.text = allOptions[position].value
+    label.text = allOptions[position].name
     return view
   }
 
@@ -48,7 +48,7 @@ class OptionsAdapter(context: Context, var resources: Int, options: List<Option>
           allOptions
         else
           allOptions.filter {
-            it.value.lowercase().contains(queryString)
+            it.name.lowercase().contains(queryString)
           }
 
         return filterResults

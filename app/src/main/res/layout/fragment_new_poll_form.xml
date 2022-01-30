@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Clave de elector"
-        android:inputType="textPersonName" />
+        android:inputType="textCapCharacters" />
 
       <EditText
         android:id="@+id/etCurp"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="CURP*"
-        android:inputType="textPersonName" />
+        android:inputType="textCapCharacters" />
 
       <EditText
         android:id="@+id/etName"
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Nombre*"
-        android:inputType="textPersonName" />
+        android:inputType="textCapCharacters" />
 
       <EditText
         android:id="@+id/etSurname"
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Apellido Paterno*"
-        android:inputType="textPersonName" />
+        android:inputType="textCapCharacters" />
 
       <EditText
         android:id="@+id/etSecondSurname"
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Apellido Materno*"
-        android:inputType="textPersonName" />
+        android:inputType="textCapCharacters" />
 
       <EditText
         android:id="@+id/etBirthDate"
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Lugar de nacimiento*"
-        android:inputType="textPersonName" />
+        android:inputType="textCapCharacters" />
 
       <EditText
         android:id="@+id/etIneExp"
@@ -151,7 +151,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Calle*"
-        android:inputType="text" />
+        android:inputType="textCapCharacters" />
 
       <EditText
         android:id="@+id/etExtNum"
@@ -159,7 +159,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Numero exterior*"
-        android:inputType="text" />
+        android:inputType="textCapCharacters" />
 
       <EditText
         android:id="@+id/etIntNum"
@@ -167,7 +167,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Numero interior"
-        android:inputType="text" />
+        android:inputType="textCapCharacters" />
 
       <TextView
         android:layout_width="match_parent"
@@ -198,8 +198,471 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:visibility="gone"
         android:hint="Direccion de vivienda actual*"
-        android:inputType="text" />
+        android:inputType="textCapCharacters" />
+
+      <EditText
+        android:id="@+id/etMaritalStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="none"
+        android:hint="Estado civil*"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:focusable="false"
+        android:background="@android:drawable/editbox_background" />
+
+      <EditText
+        android:id="@+id/etFamilyPosition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="none"
+        android:hint="Posición en familia*"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:focusable="false"
+        android:background="@android:drawable/editbox_background" />
+
+      <EditText
+        android:id="@+id/etOtherFamilyPosition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:visibility="gone"
+        android:hint="Especifique posición en familia*"
+        android:inputType="textCapCharacters" />
+
+      <EditText
+        android:id="@+id/etCellPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Número de Celular*"
+        android:maxLength="10"
+        android:inputType="phone" />
+
+      <EditText
+        android:id="@+id/etPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Teléfono fijo*"
+        android:maxLength="10"
+        android:inputType="phone" />
+
+      <EditText
+        android:id="@+id/etFamilyIntegrantsNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="¿Cuántos integrantes habitan tu domicilio?*"
+        android:maxLength="2"
+        android:inputType="number" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="¿Tiene acceso a internet la vivienda?:" />
+
+      <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <RadioButton
+          android:id="@+id/rHouseHasInternet"
+          android:layout_width="130dp"
+          android:layout_height="wrap_content"
+          android:checked="true"
+          android:text="Si" />
+
+        <RadioButton
+          android:id="@+id/rHouseDoesntHasInternet"
+          android:layout_width="130dp"
+          android:layout_height="wrap_content"
+          android:text="No" />
+      </RadioGroup>
+
+      <EditText
+        android:id="@+id/etStudyDegree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="none"
+        android:hint="Grado de estudios"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:focusable="false"
+        android:background="@android:drawable/editbox_background" />
+
+      <EditText
+        android:id="@+id/etOccupation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="none"
+        android:hint="Ocupación"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:focusable="false"
+        android:background="@android:drawable/editbox_background" />
+
+      <EditText
+        android:id="@+id/etOtherOccupation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:visibility="gone"
+        android:hint="Especifique ocupación*"
+        android:inputType="textCapCharacters" />
+
+      <EditText
+        android:id="@+id/etMobilityMethod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="none"
+        android:hint="Método de movilidad"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:focusable="false"
+        android:background="@android:drawable/editbox_background" />
+
+      <EditText
+        android:id="@+id/etOtherMobilityMethod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:visibility="gone"
+        android:hint="Especifique metodo de mobilidad*"
+        android:inputType="textCapCharacters" />
+
+      <EditText
+        android:id="@+id/etDiseases"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="none"
+        android:hint="Padecimientos, enfermedad o discapacidad"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:focusable="false"
+        android:background="@android:drawable/editbox_background" />
+
+      <EditText
+        android:id="@+id/etOtherDiseases"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:visibility="gone"
+        android:hint="Especifique Padecimientos, enfermedad o discapacidad*"
+        android:inputType="textCapCharacters" />
+
+      <EditText
+        android:id="@+id/etFederalSupports"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="none"
+        android:hint="¿Recibe apoyo federal?"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:focusable="false"
+        android:background="@android:drawable/editbox_background" />
+
+      <EditText
+        android:id="@+id/etOtherFederalSupport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:visibility="gone"
+        android:hint="Especifique apoyo federal*"
+        android:inputType="textCapCharacters" />
+
+      <EditText
+        android:id="@+id/etStateSupport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="none"
+        android:hint="¿Recibe apoyo estatal?"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:focusable="false"
+        android:background="@android:drawable/editbox_background" />
+
+      <EditText
+        android:id="@+id/etOtherStateSupport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:visibility="gone"
+        android:hint="Especifique apoyo estatal*"
+        android:inputType="textCapCharacters" />
+
+      <EditText
+        android:id="@+id/etMunicipalSupport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="none"
+        android:hint="¿Recibe apoyo municipal?"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:focusable="false"
+        android:background="@android:drawable/editbox_background" />
+
+      <EditText
+        android:id="@+id/etOtherMunicipalSupport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:visibility="gone"
+        android:hint="Especifique apoyo municipal*"
+        android:inputType="textCapCharacters" />
+
+      <EditText
+        android:id="@+id/etHobbies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="none"
+        android:hint="Pasatiempos"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:focusable="false"
+        android:background="@android:drawable/editbox_background" />
+
+      <EditText
+        android:id="@+id/etOtherHobbies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:visibility="gone"
+        android:hint="Especifique pasatiempos*"
+        android:inputType="textCapCharacters" />
+
+      <EditText
+        android:id="@+id/etReligions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="none"
+        android:hint="Religión"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:focusable="false"
+        android:background="@android:drawable/editbox_background" />
+
+      <EditText
+        android:id="@+id/etOtherReligion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:visibility="gone"
+        android:hint="Especifique religión*"
+        android:inputType="textCapCharacters" />
+
+      <EditText
+        android:id="@+id/etSports"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="none"
+        android:hint="Deporte practicado"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:focusable="false"
+        android:background="@android:drawable/editbox_background" />
+
+      <EditText
+        android:id="@+id/etOtherSport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:visibility="gone"
+        android:hint="Especifique deporte*"
+        android:inputType="textCapCharacters" />
+
+      <EditText
+        android:id="@+id/etSoccerTeam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="none"
+        android:hint="Equipo de fútbol"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:focusable="false"
+        android:background="@android:drawable/editbox_background" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Gusto por las mascotas" />
+
+      <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <RadioButton
+          android:id="@+id/rLikesPets"
+          android:layout_width="130dp"
+          android:layout_height="wrap_content"
+          android:checked="true"
+          android:text="Si" />
+
+        <RadioButton
+          android:id="@+id/rDontLikesPets"
+          android:layout_width="130dp"
+          android:layout_height="wrap_content"
+          android:text="No" />
+      </RadioGroup>
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Tiene mascotas" />
+
+      <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <RadioButton
+          android:id="@+id/rHasPets"
+          android:layout_width="130dp"
+          android:layout_height="wrap_content"
+          android:checked="true"
+          android:text="Si" />
+
+        <RadioButton
+          android:id="@+id/rDoesntHasPets"
+          android:layout_width="130dp"
+          android:layout_height="wrap_content"
+          android:text="No" />
+      </RadioGroup>
+
+      <EditText
+        android:id="@+id/etPetType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="none"
+        android:hint="Tipo de mascotas"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:focusable="false"
+        android:background="@android:drawable/editbox_background" />
+
+      <EditText
+        android:id="@+id/etOtherPetType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:visibility="gone"
+        android:hint="Especifique tipo de mascotas*"
+        android:inputType="textCapCharacters" />
+
+      <EditText
+        android:id="@+id/etGovernmentInvitationActivityOrThemes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="none"
+        android:hint="¿En qué actividad o tema te gustaría participar si te invita el gobierno municipal?"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:focusable="false"
+        android:background="@android:drawable/editbox_background" />
+
+      <EditText
+        android:id="@+id/etOtherGovernmentInvitationActivityOrThemes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:visibility="gone"
+        android:hint="Especifique que actividad o tema*"
+        android:inputType="textCapCharacters" />
+
+      <EditText
+        android:id="@+id/etGovernmentTaskActivityOrThemes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="none"
+        android:hint="¿En qué actividad o tema te gustaría que el gobierno municipal hiciera énfasis?"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:focusable="false"
+        android:background="@android:drawable/editbox_background" />
+
+      <EditText
+        android:id="@+id/etPollutionCause"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="none"
+        android:hint="¿Cuál crees que es el factor principal de contaminación ambiental en Santa Catarina?"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:focusable="false"
+        android:background="@android:drawable/editbox_background" />
+
+      <EditText
+        android:id="@+id/etPrincipalSectorProblematic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="¿Cuál es la principal problemática en tu sector?"
+        android:inputType="textCapCharacters" />
+
+      <EditText
+        android:id="@+id/etFutureFiveYears"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="¿En dónde te ves en 5 años?"
+        android:inputType="textCapCharacters" />
+
+      <EditText
+        android:id="@+id/etComments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Comentarios"
+        android:inputType="textMultiLine" />
+
+      <Button
+        android:id="@+id/btnEnviar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Enviar" />
 
     </LinearLayout>
   </ScrollView>

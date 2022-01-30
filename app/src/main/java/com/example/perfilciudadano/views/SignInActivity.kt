@@ -3,12 +3,12 @@ package com.example.perfilciudadano.views
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import com.example.perfilciudadano.*
+import com.example.perfilciudadano.models.Roles
 import com.example.perfilciudadano.network.AuthService
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -45,11 +45,11 @@ class SignInActivity : AppCompatActivity() {
         val signInResponse = AuthService().signIn(Folium)
 
         if (signInResponse != null && signInResponse.success) {
-          if (signInResponse.role == "OPERATOR") {
+          if (signInResponse.role == Roles.OPERATOR) {
             val operatorIntent = Intent(applicationContext, OperatorHomeActivity::class.java)
             finish()
             startActivity(operatorIntent)
-          } else if (signInResponse.role == "LEADER") {
+          } else if (signInResponse.role == Roles.LEADER) {
             val leaderIntent = Intent(applicationContext, LeaderHomeActivity::class.java)
             leaderIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             finish()
