@@ -12,14 +12,12 @@
     android:orientation="vertical">
 
     <TextView
-      android:id="@+id/titleLabel"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="Ingresa tu numero de folio"
       android:textSize="24sp" />
 
     <TextView
-      android:id="@+id/subtitleLabel"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="para iniciar sesion"
@@ -36,6 +34,7 @@
         android:layout_height="39dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:hint=""
         android:maxLength="1" />
 
       <EditText
@@ -44,6 +43,7 @@
         android:layout_height="39dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:hint=""
         android:maxLength="1" />
 
       <EditText
@@ -52,6 +52,7 @@
         android:layout_height="39dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:hint=""
         android:maxLength="1" />
 
       <EditText
@@ -60,6 +61,7 @@
         android:layout_height="39dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:hint=""
         android:maxLength="1" />
 
       <EditText
@@ -68,6 +70,7 @@
         android:layout_height="39dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:hint=""
         android:maxLength="1" />
 
     </LinearLayout>

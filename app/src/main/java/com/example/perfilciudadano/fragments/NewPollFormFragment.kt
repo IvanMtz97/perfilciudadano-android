@@ -1,16 +1,13 @@
 package com.example.perfilciudadano.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import com.example.perfilciudadano.R
-import com.example.perfilciudadano.models.Poll
 import com.example.perfilciudadano.providers.PollProvider
 import com.example.perfilciudadano.viewmodel.*
 
@@ -40,64 +37,64 @@ class NewPollFormFragment : Fragment() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    zipCodesViewModel.zipCodes.observe(this, Observer { item ->
+    zipCodesViewModel.zipCodes.observe(this, { item ->
       PollProvider.bindZipCodeInput(requireContext(), pollView, item, pollViewModel, zipCodesViewModel)
     })
-    sectionsViewModel.sections.observe(this, Observer { item ->
+    sectionsViewModel.sections.observe(this, { item ->
       PollProvider.bindSectionInput(requireContext(), pollView, item, pollViewModel, sectionsViewModel)
     })
-    coloniesViewModel.colonies.observe(this, Observer { item ->
+    coloniesViewModel.colonies.observe(this, { item ->
       PollProvider.bindColonyInput(requireContext(), pollView, item, pollViewModel, coloniesViewModel)
     })
-    maritalStatusesViewModel.maritalStatuses.observe(this, Observer { item ->
+    maritalStatusesViewModel.maritalStatuses.observe(this, { item ->
       PollProvider.bindMaritalStatusInput(requireContext(), pollView, item, pollViewModel, maritalStatusesViewModel)
     })
-    familyPositionsViewModel.familyPositions.observe(this, Observer { item ->
+    familyPositionsViewModel.familyPositions.observe(this, { item ->
       PollProvider.bindFamilyPositionsInput(requireContext(), pollView, item, pollViewModel, familyPositionsViewModel)
     })
-    studyDegreesViewModel.studyDegrees.observe(this, Observer { item ->
+    studyDegreesViewModel.studyDegrees.observe(this, { item ->
       PollProvider.bindStudyDegreeInput(requireContext(), pollView, item, pollViewModel, studyDegreesViewModel)
     })
-    occupationsViewModel.occupations.observe(this, Observer { item ->
+    occupationsViewModel.occupations.observe(this, { item ->
       PollProvider.bindOccupationsInput(requireContext(), pollView, item, pollViewModel, occupationsViewModel)
     })
-    mobilityMethodsViewModel.mobilityMethods.observe(this, Observer { item ->
+    mobilityMethodsViewModel.mobilityMethods.observe(this, { item ->
       PollProvider.bindMobilityMethodsInput(requireContext(), pollView, item, pollViewModel, mobilityMethodsViewModel)
     })
-    diseasesViewModel.diseases.observe(this, Observer { items ->
+    diseasesViewModel.diseases.observe(this, { items ->
       PollProvider.bindDiseasesInput(requireContext(), pollView, items, pollViewModel, diseasesViewModel)
     })
-    federalSupportsViewModel.federalSupports.observe(this, Observer { items ->
+    federalSupportsViewModel.federalSupports.observe(this, { items ->
       PollProvider.bindFederalSupportsInput(requireContext(), pollView, items, pollViewModel, federalSupportsViewModel)
     })
-    stateSupportsViewModel.stateSupports.observe(this, Observer { items ->
+    stateSupportsViewModel.stateSupports.observe(this, { items ->
       PollProvider.bindStateSupportsInput(requireContext(), pollView, items, pollViewModel, stateSupportsViewModel)
     })
-    municipalSupportsViewModel.municipalSupports.observe(this, Observer { items ->
+    municipalSupportsViewModel.municipalSupports.observe(this, { items ->
       PollProvider.bindMunicipalSupportsInput(requireContext(), pollView, items, pollViewModel, municipalSupportsViewModel)
     })
-    hobbiesViewModel.hobbies.observe(this, Observer { items ->
+    hobbiesViewModel.hobbies.observe(this, { items ->
       PollProvider.bindHobbiesInput(requireContext(), pollView, items, pollViewModel, hobbiesViewModel)
     })
-    religionsViewModel.religions.observe(this, Observer { items ->
+    religionsViewModel.religions.observe(this, { items ->
       PollProvider.bindReligionsInput(requireContext(), pollView, items, pollViewModel, religionsViewModel)
     })
-    sportsViewModel.sports.observe(this, Observer { items ->
+    sportsViewModel.sports.observe(this, { items ->
       PollProvider.bindSportsInput(requireContext(), pollView, items, pollViewModel, sportsViewModel)
     })
-    soccerTeamsViewModel.soccerTeams.observe(this, Observer { item ->
+    soccerTeamsViewModel.soccerTeams.observe(this, { item ->
       PollProvider.bindSoccerTeamsInput(requireContext(), pollView, item, pollViewModel, soccerTeamsViewModel)
     })
-    petTypesViewModel.petTypes.observe(this, Observer { item ->
+    petTypesViewModel.petTypes.observe(this, { item ->
       PollProvider.bindPetTypesInput(requireContext(), pollView, item, pollViewModel, petTypesViewModel)
     })
-    governmentInvitationActivityOrThemesViewModel.options.observe(this, Observer { items ->
+    governmentInvitationActivityOrThemesViewModel.options.observe(this, { items ->
       PollProvider.bindGovernmentInvitationActivityOrThemesInput(requireContext(), pollView, items, pollViewModel, governmentInvitationActivityOrThemesViewModel)
     })
-    governmentTaskActivityOrThemesViewModel.options.observe(this, Observer { items ->
+    governmentTaskActivityOrThemesViewModel.options.observe(this, { items ->
       PollProvider.bindGovernmentTaskActivityOrThemesInput(requireContext(), pollView, items, pollViewModel, governmentTaskActivityOrThemesViewModel)
     })
-    pollutionCausesViewModel.options.observe(this, Observer { items ->
+    pollutionCausesViewModel.options.observe(this, { items ->
       PollProvider.bindPollutionCauseInput(requireContext(), pollView, items, pollViewModel, pollutionCausesViewModel)
     })
   }
@@ -105,9 +102,10 @@ class NewPollFormFragment : Fragment() {
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View? {
+  ): View {
     val view: View = inflater.inflate(R.layout.fragment_new_poll_form, container, false)
     val sendButton = view.findViewById<Button>(R.id.btnEnviar)
+    val btnIneScan = view.findViewById<Button>(R.id.btnIneScan)
     pollView = view
     // TODO: Implement elector key validation with regex or length
     // TODO: Implement CURP validation with regex

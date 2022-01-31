@@ -9,8 +9,8 @@ import com.example.perfilciudadano.network.PollutionCausesService
 import kotlinx.coroutines.launch
 
 class PollutionCausesViewModel : ViewModel() {
-  val mutableOptions = MutableLiveData<List<Option>>()
-  val mutableSelectedOption = MutableLiveData<Option>()
+  private val mutableOptions = MutableLiveData<List<Option>>()
+  private val mutableSelectedOption = MutableLiveData<Option>()
   val options: LiveData<List<Option>> get() = mutableOptions
   val selectedOption: LiveData<Option> get() = mutableSelectedOption
 

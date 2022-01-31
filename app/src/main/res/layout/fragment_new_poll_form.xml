@@ -17,6 +17,12 @@
       android:layout_height="wrap_content"
       android:orientation="vertical">
 
+      <Button
+        android:id="@+id/btnIneScan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Escanear ine" />
+
       <EditText
         android:id="@+id/etElectorKey"
         android:layout_width="match_parent"
@@ -82,7 +88,6 @@
         android:inputType="number" />
 
       <TextView
-        android:id="@+id/textView7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

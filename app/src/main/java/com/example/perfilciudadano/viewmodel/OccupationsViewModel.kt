@@ -20,7 +20,7 @@ class OccupationsViewModel : ViewModel() {
 
   fun getAllOccupations() {
     viewModelScope.launch {
-      var occupations = OccupationsService().getAllOccupations()
+      val occupations = OccupationsService().getAllOccupations()
 
       if (!occupations.isNullOrEmpty()) {
         mutableOccupations.postValue(occupations)

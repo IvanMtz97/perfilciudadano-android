@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import com.example.perfilciudadano.R
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import com.example.perfilciudadano.models.Option
 import com.example.perfilciudadano.models.Poll
 import com.example.perfilciudadano.viewmodel.*
@@ -63,97 +61,97 @@ class NewPollActivity : AppCompatActivity() {
       Log.d("SELECTED ${tag.uppercase()}", "{ id: ${item.id}, value: ${item.name} }")
     }
 
-    sectionsViewModel.selectedSection.observe(this, Observer { item ->
+    sectionsViewModel.selectedSection.observe(this, { item ->
       poll.Section = item.id
       pollViewModel.updatePoll(poll)
       logSelectedData("SECTION", item)
     })
-    zipCodesViewModel.selectedZipCode.observe(this, Observer { item ->
+    zipCodesViewModel.selectedZipCode.observe(this, { item ->
       poll.ZipCode = item.id
       pollViewModel.updatePoll(poll)
       coloniesViewModel.clear()
       coloniesViewModel.getColoniesByZipCode(item.name)
       logSelectedData("ZIP CODE", item)
     })
-    coloniesViewModel.selectedColony.observe(this, Observer { item ->
+    coloniesViewModel.selectedColony.observe(this, { item ->
       poll.Colony = item.id
       pollViewModel.updatePoll(poll)
       logSelectedData("COLONY", item)
     })
-    maritalStatusesViewModel.selectedMaritalStatus.observe(this, Observer { item ->
+    maritalStatusesViewModel.selectedMaritalStatus.observe(this, { item ->
       poll.MaritalStatus = item.id
       pollViewModel.updatePoll(poll)
       logSelectedData("MARITAL STATUS", item)
     })
-    familyPositionsViewModel.selectedFamilyPosition.observe(this, Observer { item ->
+    familyPositionsViewModel.selectedFamilyPosition.observe(this, { item ->
       poll.FamilyPosition = item.id
       pollViewModel.updatePoll(poll)
       logSelectedData("FAMILY POS", item)
     })
-    studyDegreesViewModel.selectedStudyDegree.observe(this, Observer { item ->
+    studyDegreesViewModel.selectedStudyDegree.observe(this, { item ->
       poll.StudyDegree = item.id
       pollViewModel.updatePoll(poll)
       logSelectedData("STUDY DEGREE", item)
     })
-    occupationsViewModel.selectedOccupation.observe(this, Observer { item ->
+    occupationsViewModel.selectedOccupation.observe(this, { item ->
       poll.Occupation = item.id
       pollViewModel.updatePoll(poll)
       logSelectedData("OCCUPATION", item)
     })
-    mobilityMethodsViewModel.selectedMobilityMethod.observe(this, Observer { item ->
+    mobilityMethodsViewModel.selectedMobilityMethod.observe(this, { item ->
       poll.MobilityMethod = item.id
       pollViewModel.updatePoll(poll)
       logSelectedData("MOBILITY METHOD", item)
     })
-    diseasesViewModel.selectedDiseases.observe(this, Observer { items ->
-      poll.Diseases = items.map { it -> it.id }
+    diseasesViewModel.selectedDiseases.observe(this, { items ->
+      poll.Diseases = items.map { it.id }
       pollViewModel.updatePoll(poll)
     })
-    federalSupportsViewModel.selectedFederalSupports.observe(this, Observer { items ->
-      poll.FederalSupports = items.map { it -> it.id }
+    federalSupportsViewModel.selectedFederalSupports.observe(this, { items ->
+      poll.FederalSupports = items.map { it.id }
       pollViewModel.updatePoll(poll)
     })
-    stateSupportsViewModel.selectedStateSupports.observe(this, Observer { items ->
-      poll.StateSupports = items.map { it -> it.id }
+    stateSupportsViewModel.selectedStateSupports.observe(this, { items ->
+      poll.StateSupports = items.map { it.id }
       pollViewModel.updatePoll(poll)
     })
-    municipalSupportsViewModel.selectedMunicipalSupports.observe(this, Observer { items ->
-      poll.MunicipalSupports = items.map { it -> it.id }
+    municipalSupportsViewModel.selectedMunicipalSupports.observe(this, { items ->
+      poll.MunicipalSupports = items.map { it.id }
       pollViewModel.updatePoll(poll)
     })
-    hobbiesViewModel.selectedHobbies.observe(this, Observer { items ->
-      poll.Hobbies = items.map { it -> it.id }
+    hobbiesViewModel.selectedHobbies.observe(this, { items ->
+      poll.Hobbies = items.map { it.id }
       pollViewModel.updatePoll(poll)
     })
-    religionsViewModel.selectedReligion.observe(this, Observer { item ->
+    religionsViewModel.selectedReligion.observe(this, { item ->
       poll.Religion = item.id
       pollViewModel.updatePoll(poll)
     })
-    sportsViewModel.selectedSports.observe(this, Observer { items ->
-      poll.Sports = items.map { it -> it.id }
+    sportsViewModel.selectedSports.observe(this, { items ->
+      poll.Sports = items.map { it.id }
       pollViewModel.updatePoll(poll)
     })
-    soccerTeamsViewModel.selectedSoccerTeam.observe(this, Observer { item ->
+    soccerTeamsViewModel.selectedSoccerTeam.observe(this, { item ->
       poll.SoccerTeam = item.id
       pollViewModel.updatePoll(poll)
     })
-    petTypesViewModel.selectedPetTypes.observe(this, Observer { items ->
-      poll.PetTypes = items.map { it -> it.id }
+    petTypesViewModel.selectedPetTypes.observe(this, { items ->
+      poll.PetTypes = items.map { it.id }
       pollViewModel.updatePoll(poll)
     })
-    governmentInvitationActivityOrThemesViewModel.selectedOptions.observe(this, Observer { items ->
-      poll.GovernmentInvitationActivityOrThemes = items.map { it -> it.id }
+    governmentInvitationActivityOrThemesViewModel.selectedOptions.observe(this, { items ->
+      poll.GovernmentInvitationActivityOrThemes = items.map { it.id }
       pollViewModel.updatePoll(poll)
     })
-    governmentTaskActivityOrThemesViewModel.selectedOptions.observe(this, Observer { items ->
-      poll.GovernmentTaskActivityOrThemes = items.map { it -> it.id }
+    governmentTaskActivityOrThemesViewModel.selectedOptions.observe(this, { items ->
+      poll.GovernmentTaskActivityOrThemes = items.map { it.id }
       pollViewModel.updatePoll(poll)
     })
-    pollutionCausesViewModel.selectedOption.observe(this, Observer { item ->
+    pollutionCausesViewModel.selectedOption.observe(this, { item ->
       poll.PollutionCause = item.id
       pollViewModel.updatePoll(poll)
     })
-    pollViewModel.poll.observe(this, Observer { item ->
+    pollViewModel.poll.observe(this, { item ->
       Log.d("UPDATED POLL", item.toString())
     })
   }

@@ -21,28 +21,28 @@ class SignInActivity : AppCompatActivity() {
   private lateinit var codeFifthDigitInput: EditText
   private lateinit var signInButton: Button
 
-  fun getFolium(): String {
+  private fun getFolium(): String {
     return "${codeFirstDigitInput.text}${codeSecondDigitInput.text}${codeThirdDigitInput.text}${codeFourthDigitInput.text}${codeFifthDigitInput.text}"
   }
 
-  fun isFoliumValid(): Boolean {
-    return codeFirstDigitInput.text.length > 0 && codeSecondDigitInput.text.length > 0 && codeThirdDigitInput.text.length > 0 && codeFourthDigitInput.text.length > 0 && codeFifthDigitInput.text.length > 0
+  private fun isFoliumValid(): Boolean {
+    return codeFirstDigitInput.text.isNotEmpty() && codeSecondDigitInput.text.isNotEmpty() && codeThirdDigitInput.text.isNotEmpty() && codeFourthDigitInput.text.isNotEmpty() && codeFifthDigitInput.text.isNotEmpty()
   }
 
-  fun onSignInInputChange(inputToValidate: EditText, inputToFocus: EditText) {
+  private fun onSignInInputChange(inputToValidate: EditText, inputToFocus: EditText) {
     if (isFoliumValid()) {
       signInButton.isEnabled = true
     } else {
       signInButton.isEnabled = false
-      if (inputToValidate.text.length > 0) inputToFocus.requestFocus()
+      if (inputToValidate.text.isNotEmpty()) inputToFocus.requestFocus()
     }
   }
 
-  fun handleSignInOnClick() {
-    val Folium = getFolium()
+  private fun handleSignInOnClick() {
+    val folium = getFolium()
     runBlocking {
       launch {
-        val signInResponse = AuthService().signIn(Folium)
+        val signInResponse = AuthService().signIn(folium)
 
         if (signInResponse != null && signInResponse.success) {
           if (signInResponse.role == Roles.OPERATOR) {
@@ -66,11 +66,11 @@ class SignInActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_sign_in)
     this.supportActionBar?.hide()
-    codeFirstDigitInput = findViewById<EditText>(R.id.codeFirstDigitInput)
-    codeSecondDigitInput = findViewById<EditText>(R.id.codeSecondDigitInput)
-    codeThirdDigitInput = findViewById<EditText>(R.id.codeThirdDigitInput)
-    codeFourthDigitInput = findViewById<EditText>(R.id.codeFourthDigitInput)
-    codeFifthDigitInput = findViewById<EditText>(R.id.codeFifthDigitInput)
+    codeFirstDigitInput = findViewById(R.id.codeFirstDigitInput)
+    codeSecondDigitInput = findViewById(R.id.codeSecondDigitInput)
+    codeThirdDigitInput = findViewById(R.id.codeThirdDigitInput)
+    codeFourthDigitInput = findViewById(R.id.codeFourthDigitInput)
+    codeFifthDigitInput = findViewById(R.id.codeFifthDigitInput)
     signInButton = findViewById(R.id.signInButton)
     signInButton.isEnabled = false
 

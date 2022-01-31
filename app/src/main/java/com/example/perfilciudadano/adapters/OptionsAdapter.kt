@@ -1,7 +1,6 @@
 package com.example.perfilciudadano.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import android.widget.TextView
 import com.example.perfilciudadano.R
 import com.example.perfilciudadano.models.Option
 
-class OptionsAdapter(context: Context, var resources: Int, options: List<Option>) : ArrayAdapter<Option>(context, resources, options) {
+class OptionsAdapter(context: Context, private var resources: Int, options: List<Option>) : ArrayAdapter<Option>(context, resources, options) {
   private var allOptions: List<Option> = options
   override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
     val layoutInflater = LayoutInflater.from(context)
@@ -21,12 +20,12 @@ class OptionsAdapter(context: Context, var resources: Int, options: List<Option>
     return view
   }
 
-  override fun getItem(position: Int): Option? {
-    return allOptions.get(position)
+  override fun getItem(position: Int): Option {
+    return allOptions[position]
   }
 
   override fun getItemId(position: Int): Long {
-    return allOptions.get(position).id.toLong()
+    return allOptions[position].id.toLong()
   }
 
   override fun getCount(): Int {
@@ -44,7 +43,7 @@ class OptionsAdapter(context: Context, var resources: Int, options: List<Option>
       override fun performFiltering(charSequence: CharSequence?): FilterResults {
         val queryString = charSequence.toString().lowercase()
         val filterResults = FilterResults()
-        filterResults.values = if (queryString == null || queryString.isEmpty())
+        filterResults.values = if (queryString.isEmpty())
           allOptions
         else
           allOptions.filter {

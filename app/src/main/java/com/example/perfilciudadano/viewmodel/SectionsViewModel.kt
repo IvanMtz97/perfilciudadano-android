@@ -20,7 +20,7 @@ class SectionsViewModel : ViewModel() {
 
   fun getAllSections() {
     viewModelScope.launch {
-      var sections = SectionsService().getAllSections()
+      val sections = SectionsService().getAllSections()
 
       if (!sections.isNullOrEmpty()) {
         mutableSections.postValue(sections)

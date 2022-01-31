@@ -18,8 +18,8 @@ import com.example.perfilciudadano.viewmodel.*
 
 class PollProvider {
   companion object {
-    var poll: Poll = Poll()
-    val OtherOption = "Otro (especificar)"
+    private var poll: Poll = Poll()
+    private const val OtherOption = "Otro (especificar)"
 
     fun bindElectorKeyInput(view: View, pollViewModel: PollViewModel) {
       val electorKeyInput = view.findViewById<EditText>(R.id.etElectorKey)
@@ -456,7 +456,7 @@ class PollProvider {
     ) {
       val diseasesInput = view.findViewById<EditText>(R.id.etDiseases)
       val otherDiseasesInput = view.findViewById<EditText>(R.id.etOtherDiseases)
-      var selectedOptions: MutableList<Option> = mutableListOf()
+      val selectedOptions: MutableList<Option> = mutableListOf()
       diseasesInput.setOnClickListener {
         val dialog = Dialog(context)
         dialog.setContentView(R.layout.dismissable_unsearchable_list)
@@ -478,9 +478,9 @@ class PollProvider {
             diseasesViewModel.selectDiseases(selectedOptions)
             poll.Diseases = selectedOptions.map { selectedOption -> selectedOption.id }
             pollViewModel.updatePoll(poll)
-            diseasesInput.setText(selectedOptions.map { selectedOption -> selectedOption.name }.joinToString(", "))
+            diseasesInput.setText(selectedOptions.joinToString(", ") { it.name })
           }
-          val isOtherSelected = selectedOptions.filter { selectedOption -> selectedOption.name == OtherOption }.size > 0
+          val isOtherSelected = selectedOptions.any { it.name == OtherOption }
           if (isOtherSelected) {
             otherDiseasesInput.visibility = View.VISIBLE
           } else {
@@ -510,7 +510,7 @@ class PollProvider {
     ) {
       val federalSupportsInput = view.findViewById<EditText>(R.id.etFederalSupports)
       val otherFederalSupportsInput = view.findViewById<EditText>(R.id.etOtherFederalSupport)
-      var selectedOptions: MutableList<Option> = mutableListOf()
+      val selectedOptions: MutableList<Option> = mutableListOf()
       federalSupportsInput.setOnClickListener {
         val dialog = Dialog(context)
         dialog.setContentView(R.layout.dismissable_unsearchable_list)
@@ -532,9 +532,9 @@ class PollProvider {
             federalSupportsViewModel.selectFederalSupports(selectedOptions)
             poll.FederalSupports = selectedOptions.map { selectedOption -> selectedOption.id }
             pollViewModel.updatePoll(poll)
-            federalSupportsInput.setText(selectedOptions.map { selectedOption -> selectedOption.name }.joinToString(", "))
+            federalSupportsInput.setText(selectedOptions.joinToString(", ") { it.name })
           }
-          val isOtherSelected = selectedOptions.filter { selectedOption -> selectedOption.name == OtherOption }.size > 0
+          val isOtherSelected = selectedOptions.any { it.name == OtherOption }
           if (isOtherSelected) {
             otherFederalSupportsInput.visibility = View.VISIBLE
           } else {
@@ -564,7 +564,7 @@ class PollProvider {
     ) {
       val stateSupportsInput = view.findViewById<EditText>(R.id.etStateSupport)
       val otherStateSupportsInput = view.findViewById<EditText>(R.id.etOtherStateSupport)
-      var selectedOptions: MutableList<Option> = mutableListOf()
+      val selectedOptions: MutableList<Option> = mutableListOf()
       stateSupportsInput.setOnClickListener {
         val dialog = Dialog(context)
         dialog.setContentView(R.layout.dismissable_unsearchable_list)
@@ -586,9 +586,9 @@ class PollProvider {
             stateSupportsViewModel.selectStateSupports(selectedOptions)
             poll.StateSupports = selectedOptions.map { selectedOption -> selectedOption.id }
             pollViewModel.updatePoll(poll)
-            stateSupportsInput.setText(selectedOptions.map { selectedOption -> selectedOption.name }.joinToString(", "))
+            stateSupportsInput.setText(selectedOptions.joinToString(", ") { it.name })
           }
-          val isOtherSelected = selectedOptions.filter { selectedOption -> selectedOption.name == OtherOption }.size > 0
+          val isOtherSelected = selectedOptions.any { it.name == OtherOption }
           if (isOtherSelected) {
             otherStateSupportsInput.visibility = View.VISIBLE
           } else {
@@ -618,7 +618,7 @@ class PollProvider {
     ) {
       val municipalSupportsInput = view.findViewById<EditText>(R.id.etMunicipalSupport)
       val otherMunicipalSupportsInput = view.findViewById<EditText>(R.id.etOtherMunicipalSupport)
-      var selectedOptions: MutableList<Option> = mutableListOf()
+      val selectedOptions: MutableList<Option> = mutableListOf()
       municipalSupportsInput.setOnClickListener {
         val dialog = Dialog(context)
         dialog.setContentView(R.layout.dismissable_unsearchable_list)
@@ -640,9 +640,10 @@ class PollProvider {
             municipalSupportsViewModel.selectMunicipalSupports(selectedOptions)
             poll.MunicipalSupports = selectedOptions.map { selectedOption -> selectedOption.id }
             pollViewModel.updatePoll(poll)
-            municipalSupportsInput.setText(selectedOptions.map { option -> option.name }.joinToString(", "))
+            municipalSupportsInput.setText(selectedOptions.joinToString(", ") { option -> option.name })
           }
-          val isOtherSelected = selectedOptions.filter { selectedOption -> selectedOption.name == OtherOption }.size > 0
+          val isOtherSelected =
+            selectedOptions.any { selectedOption -> selectedOption.name == OtherOption }
           if (isOtherSelected) {
             otherMunicipalSupportsInput.visibility = View.VISIBLE
           } else {
@@ -672,7 +673,7 @@ class PollProvider {
     ) {
       val input = view.findViewById<EditText>(R.id.etHobbies)
       val otherInput = view.findViewById<EditText>(R.id.etOtherHobbies)
-      var selectedOptions: MutableList<Option> = mutableListOf()
+      val selectedOptions: MutableList<Option> = mutableListOf()
       input.setOnClickListener {
         val dialog = Dialog(context)
         dialog.setContentView(R.layout.dismissable_unsearchable_list)
@@ -694,9 +695,10 @@ class PollProvider {
             hobbiesViewModel.selectHobbies(selectedOptions)
             poll.Hobbies = selectedOptions.map { selectedOption -> selectedOption.id }
             pollViewModel.updatePoll(poll)
-            input.setText(selectedOptions.map { option -> option.name }.joinToString(", "))
+            input.setText(selectedOptions.joinToString(", ") { option -> option.name })
           }
-          val isOtherSelected = selectedOptions.filter { selectedOption -> selectedOption.name == OtherOption }.size > 0
+          val isOtherSelected =
+            selectedOptions.any { selectedOption -> selectedOption.name == OtherOption }
           if (isOtherSelected) {
             otherInput.visibility = View.VISIBLE
           } else {
@@ -769,7 +771,7 @@ class PollProvider {
     ) {
       val input = view.findViewById<EditText>(R.id.etSports)
       val otherInput = view.findViewById<EditText>(R.id.etOtherSport)
-      var selectedOptions: MutableList<Option> = mutableListOf()
+      val selectedOptions: MutableList<Option> = mutableListOf()
       input.setOnClickListener {
         val dialog = Dialog(context)
         dialog.setContentView(R.layout.dismissable_unsearchable_list)
@@ -791,9 +793,10 @@ class PollProvider {
             sportsViewModel.selectSports(selectedOptions)
             poll.Sports = selectedOptions.map { selectedOption -> selectedOption.id }
             pollViewModel.updatePoll(poll)
-            input.setText(selectedOptions.map { option -> option.name }.joinToString(", "))
+            input.setText(selectedOptions.joinToString(", ") { option -> option.name })
           }
-          val isOtherSelected = selectedOptions.filter { selectedOption -> selectedOption.name == OtherOption }.size > 0
+          val isOtherSelected =
+            selectedOptions.any { selectedOption -> selectedOption.name == OtherOption }
           if (isOtherSelected) {
             otherInput.visibility = View.VISIBLE
           } else {
@@ -880,7 +883,7 @@ class PollProvider {
     ) {
       val input = view.findViewById<EditText>(R.id.etPetType)
       val otherInput = view.findViewById<EditText>(R.id.etOtherPetType)
-      var selectedOptions: MutableList<Option> = mutableListOf()
+      val selectedOptions: MutableList<Option> = mutableListOf()
       input.setOnClickListener {
         val dialog = Dialog(context)
         dialog.setContentView(R.layout.dismissable_unsearchable_list)
@@ -902,9 +905,10 @@ class PollProvider {
             petTypesViewModel.selectPetTypes(selectedOptions)
             poll.PetTypes = selectedOptions.map { selectedOption -> selectedOption.id }
             pollViewModel.updatePoll(poll)
-            input.setText(selectedOptions.map { option -> option.name }.joinToString(", "))
+            input.setText(selectedOptions.joinToString(", ") { option -> option.name })
           }
-          val isOtherSelected = selectedOptions.filter { selectedOption -> selectedOption.name == OtherOption }.size > 0
+          val isOtherSelected =
+            selectedOptions.any { selectedOption -> selectedOption.name == OtherOption }
           if (isOtherSelected) {
             otherInput.visibility = View.VISIBLE
           } else {
@@ -934,7 +938,7 @@ class PollProvider {
     ) {
       val input = view.findViewById<EditText>(R.id.etGovernmentInvitationActivityOrThemes)
       val otherInput = view.findViewById<EditText>(R.id.etOtherGovernmentInvitationActivityOrThemes)
-      var selectedOptions: MutableList<Option> = mutableListOf()
+      val selectedOptions: MutableList<Option> = mutableListOf()
       input.setOnClickListener {
         val dialog = Dialog(context)
         dialog.setContentView(R.layout.dismissable_unsearchable_list)
@@ -956,9 +960,10 @@ class PollProvider {
             governmentInvitationActivityOrThemesViewModel.selectOptions(selectedOptions)
             poll.GovernmentInvitationActivityOrThemes = selectedOptions.map { selectedOption -> selectedOption.id }
             pollViewModel.updatePoll(poll)
-            input.setText(selectedOptions.map { option -> option.name }.joinToString(", "))
+            input.setText(selectedOptions.joinToString(", ") { option -> option.name })
           }
-          val isOtherSelected = selectedOptions.filter { selectedOption -> selectedOption.name == OtherOption }.size > 0
+          val isOtherSelected =
+            selectedOptions.any { selectedOption -> selectedOption.name == OtherOption }
           if (isOtherSelected) {
             otherInput.visibility = View.VISIBLE
           } else {
@@ -987,7 +992,7 @@ class PollProvider {
       governmentTaskActivityOrThemesViewModel: GovernmentTaskActivityOrThemesViewModel
     ) {
       val input = view.findViewById<EditText>(R.id.etGovernmentTaskActivityOrThemes)
-      var selectedOptions: MutableList<Option> = mutableListOf()
+      val selectedOptions: MutableList<Option> = mutableListOf()
       input.setOnClickListener {
         val dialog = Dialog(context)
         dialog.setContentView(R.layout.dismissable_unsearchable_list)
@@ -1009,7 +1014,7 @@ class PollProvider {
             governmentTaskActivityOrThemesViewModel.selectOptions(selectedOptions)
             poll.GovernmentTaskActivityOrThemes = selectedOptions.map { selectedOption -> selectedOption.id }
             pollViewModel.updatePoll(poll)
-            input.setText(selectedOptions.map { option -> option.name }.joinToString(", "))
+            input.setText(selectedOptions.joinToString(", ") { option -> option.name })
           }
         }
         dismissButton.setOnClickListener {
