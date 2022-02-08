@@ -10,7 +10,7 @@ data class Poll(
   var BirthPlace: String = "",
   var IneExpirationYear: Number = -1,
   var Gender: String = "M",
-  var ZipCode: Number = -1,
+  var ZipCode: String = "",
   var Section: Number = -1,
   var Colony: Number = -1,
   var Street: String = "",

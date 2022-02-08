@@ -2,8 +2,9 @@ package com.example.perfilciudadano.providers
 
 import com.example.perfilciudadano.models.Option
 
-class StateSupportsProvider {
+class OptionsProvider {
   companion object {
-    var stateSupports: List<Option> = emptyList()
+    var options: List<Option> = emptyList()
+    var colonies: List<Option> = emptyList()
   }
 }

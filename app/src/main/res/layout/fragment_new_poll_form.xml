@@ -3,6 +3,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   tools:context=".fragments.NewPollFormFragment">
 
   <!-- TODO: Update blank fragment layout -->
@@ -10,7 +11,9 @@
   <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp">
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    >
 
     <LinearLayout
       android:layout_width="match_parent"
@@ -23,179 +26,340 @@
         android:layout_height="wrap_content"
         android:text="Escanear ine" />
 
-      <EditText
-        android:id="@+id/etElectorKey"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Clave de elector"
-        android:inputType="textCapCharacters" />
 
-      <EditText
-        android:id="@+id/etCurp"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loElectorKey"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="CURP*"
-        android:inputType="textCapCharacters" />
+        android:layout_marginBottom="15dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
 
-      <EditText
-        android:id="@+id/etName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Nombre*"
-        android:inputType="textCapCharacters" />
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etElectorKey"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="Clave de elector"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
 
-      <EditText
-        android:id="@+id/etSurname"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loCurp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Apellido Paterno*"
-        android:inputType="textCapCharacters" />
+        android:layout_marginBottom="15dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
 
-      <EditText
-        android:id="@+id/etSecondSurname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Apellido Materno*"
-        android:inputType="textCapCharacters" />
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etCurp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="CURP*"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
 
-      <EditText
-        android:id="@+id/etBirthDate"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Fecha de nacimiento* DD/MM/AAAA"
-        android:inputType="datetime" />
+        android:layout_marginBottom="15dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
 
-      <EditText
-        android:id="@+id/etBirthPlace"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Lugar de nacimiento*"
-        android:inputType="textCapCharacters" />
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etName"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="Nombre*"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
 
-      <EditText
-        android:id="@+id/etIneExp"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loSurName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Vigencia del INE* AAAA"
-        android:inputType="number" />
+        android:layout_marginBottom="15dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etSurname"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="Apellido Paterno*"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loSecondSurName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etSecondSurname"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="Apellido Materno*"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loBirthDate"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etBirthDate"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="Fecha de nacimiento* DD/MM/AAAA"
+          android:inputType="datetime"
+          android:textColorHint="@color/purple_500" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loBirthPlace"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etBirthPlace"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="Lugar de nacimiento*"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loIneExp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etIneExp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="Vigencia del INE* AAAA"
+          android:inputType="number" />
+      </com.google.android.material.textfield.TextInputLayout>
 
       <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Genero*:" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:text="Genero*:"
+        android:textColor="@color/purple_500"
+        android:textStyle="bold" />
 
       <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="15dp"
         android:orientation="horizontal">
 
         <RadioButton
           android:id="@+id/rMale"
-          android:layout_width="130dp"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Masculino" />
+          android:layout_weight="1"
+          android:layout_marginRight="25dp"
+          android:background="@drawable/radio_selector"
+          android:button="@android:color/transparent"
+          android:text="Masculino"
+          android:textAlignment="center"
+          android:textColor="@drawable/text_color" />
 
         <RadioButton
           android:id="@+id/rFemale"
-          android:layout_width="130dp"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Femenino" />
+          android:layout_weight="1"
+          android:background="@drawable/radio_selector"
+          android:button="@android:color/transparent"
+          android:text="Femenino"
+          android:textAlignment="center"
+          android:textColor="@drawable/text_color" />
       </RadioGroup>
 
-      <EditText
-        android:id="@+id/etZipCode"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loZipCode"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        android:hint="Codigo Postal*"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:focusable="false"
-        android:background="@android:drawable/editbox_background" />
+        android:layout_marginBottom="10dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
 
-      <EditText
-        android:id="@+id/etSection"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        android:hint="Seccion*"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:focusable="false"
-        android:background="@android:drawable/editbox_background" />
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etZipCode"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="Codigo Postal*"
+          android:inputType="number" />
+      </com.google.android.material.textfield.TextInputLayout>
 
-      <EditText
-        android:id="@+id/etColony"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loSection"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        android:hint="Colonia*"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:focusable="false"
-        android:background="@android:drawable/editbox_background" />
+        android:layout_marginBottom="10dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
 
-      <EditText
-        android:id="@+id/etStreet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Calle*"
-        android:inputType="textCapCharacters" />
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etSection"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:drawableEnd="@drawable/ic_arrow_down"
+          android:focusable="false"
+          android:gravity="center_vertical"
+          android:hint="Seccion*"
+          android:inputType="none"
+          android:padding="12dp" />
+      </com.google.android.material.textfield.TextInputLayout>
 
-      <EditText
-        android:id="@+id/etExtNum"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loColony"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Numero exterior*"
-        android:inputType="textCapCharacters" />
+        android:layout_marginBottom="10dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
 
-      <EditText
-        android:id="@+id/etIntNum"
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etColony"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:drawableEnd="@drawable/ic_arrow_down"
+          android:focusable="false"
+          android:gravity="center_vertical"
+          android:hint="Colonia*"
+          android:inputType="none"
+          android:padding="12dp" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loStreet"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Numero interior"
-        android:inputType="textCapCharacters" />
+        android:layout_marginBottom="15dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etStreet"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="Calle*"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loExtNum"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etExtNum"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="Numero exterior*"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etIntNum"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="Numero interior"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
 
       <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/purple_500"
+        android:textStyle="bold"
         android:text="¿Coincide INE con dirección de vivienda actual?*:" />
 
       <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="15dp"
         android:orientation="horizontal">
 
         <RadioButton
           android:id="@+id/rIneMatchesLivingAddress"
-          android:layout_width="130dp"
+          android:text="Si"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Si" />
+          android:layout_weight="1"
+          android:layout_marginRight="25dp"
+          android:background="@drawable/radio_selector"
+          android:button="@android:color/transparent"
+          android:textAlignment="center"
+          android:textColor="@drawable/text_color" />
 
         <RadioButton
           android:id="@+id/rIneDoesntMatchesLivingAddress"
-          android:layout_width="130dp"
+          android:text="No"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="No" />
+          android:layout_weight="1"
+          android:background="@drawable/radio_selector"
+          android:button="@android:color/transparent"
+          android:textAlignment="center"
+          android:textColor="@drawable/text_color" />
       </RadioGroup>
 
       <EditText
@@ -203,464 +367,753 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:visibility="gone"
         android:hint="Direccion de vivienda actual*"
-        android:inputType="textCapCharacters" />
+        android:inputType="textCapCharacters"
+        android:visibility="gone" />
 
-      <EditText
-        android:id="@+id/etMaritalStatus"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loMaritalStatus"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        android:hint="Estado civil*"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:focusable="false"
-        android:background="@android:drawable/editbox_background" />
+        android:layout_marginBottom="10dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
 
-      <EditText
-        android:id="@+id/etFamilyPosition"
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etMaritalStatus"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:drawableEnd="@drawable/ic_arrow_down"
+          android:focusable="false"
+          android:gravity="center_vertical"
+          android:hint="Estado civil*"
+          android:inputType="none"
+          android:padding="12dp" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loFamilyPosition"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        android:hint="Posición en familia*"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:focusable="false"
-        android:background="@android:drawable/editbox_background" />
+        android:layout_marginBottom="10dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etFamilyPosition"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:drawableEnd="@drawable/ic_arrow_down"
+          android:focusable="false"
+          android:gravity="center_vertical"
+          android:hint="Posición en familia*"
+          android:inputType="none"
+          android:padding="12dp" />
+      </com.google.android.material.textfield.TextInputLayout>
 
       <EditText
         android:id="@+id/etOtherFamilyPosition"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:visibility="gone"
         android:hint="Especifique posición en familia*"
-        android:inputType="textCapCharacters" />
+        android:inputType="textCapCharacters"
+        android:visibility="gone" />
 
-      <EditText
-        android:id="@+id/etCellPhoneNumber"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loCellPhoneNumber"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Número de Celular*"
-        android:maxLength="10"
-        android:inputType="phone" />
+        android:layout_marginBottom="15dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
 
-      <EditText
-        android:id="@+id/etPhoneNumber"
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etCellPhoneNumber"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="Número de Celular*"
+          android:inputType="phone"
+          android:maxLength="10" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loPhoneNumber"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Teléfono fijo*"
-        android:maxLength="10"
-        android:inputType="phone" />
+        android:layout_marginBottom="15dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
 
-      <EditText
-        android:id="@+id/etFamilyIntegrantsNumber"
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etPhoneNumber"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="Teléfono fijo*"
+          android:inputType="phone"
+          android:maxLength="10" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loFamilyIntegrantsNumber"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="¿Cuántos integrantes habitan tu domicilio?*"
-        android:maxLength="2"
-        android:inputType="number" />
+        android:layout_marginBottom="15dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etFamilyIntegrantsNumber"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="¿Cuántos integrantes habitan tu domicilio?*"
+          android:inputType="number"
+          android:maxLength="2" />
+      </com.google.android.material.textfield.TextInputLayout>
 
       <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/purple_500"
+        android:textStyle="bold"
         android:text="¿Tiene acceso a internet la vivienda?:" />
 
       <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="15dp"
         android:orientation="horizontal">
 
         <RadioButton
           android:id="@+id/rHouseHasInternet"
-          android:layout_width="130dp"
+          android:text="Si"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:checked="true"
-          android:text="Si" />
+          android:layout_weight="1"
+          android:layout_marginRight="25dp"
+          android:background="@drawable/radio_selector"
+          android:button="@android:color/transparent"
+          android:textAlignment="center"
+          android:textColor="@drawable/text_color"
+          android:checked="true" />
 
         <RadioButton
           android:id="@+id/rHouseDoesntHasInternet"
-          android:layout_width="130dp"
+          android:text="No"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="No" />
+          android:layout_weight="1"
+          android:background="@drawable/radio_selector"
+          android:button="@android:color/transparent"
+          android:textAlignment="center"
+          android:textColor="@drawable/text_color"  />
       </RadioGroup>
 
-      <EditText
-        android:id="@+id/etStudyDegree"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loStudyDegree"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        android:hint="Grado de estudios"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:focusable="false"
-        android:background="@android:drawable/editbox_background" />
+        android:layout_marginBottom="15dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
 
-      <EditText
-        android:id="@+id/etOccupation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        android:hint="Ocupación"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:focusable="false"
-        android:background="@android:drawable/editbox_background" />
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etStudyDegree"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:drawableEnd="@drawable/ic_arrow_down"
+          android:ems="10"
+          android:focusable="false"
+          android:gravity="center_vertical"
+          android:hint="Grado de estudios"
+          android:inputType="none"
+          android:padding="12dp" />
+      </com.google.android.material.textfield.TextInputLayout>
 
-      <EditText
-        android:id="@+id/etOtherOccupation"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loOccupation"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_marginBottom="15dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etOccupation"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:drawableEnd="@drawable/ic_arrow_down"
+          android:ems="10"
+          android:focusable="false"
+          android:gravity="center_vertical"
+          android:hint="Ocupación"
+          android:inputType="none"
+          android:padding="12dp" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loOtherOccupation"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:visibility="gone"
-        android:hint="Especifique ocupación*"
-        android:inputType="textCapCharacters" />
-
-      <EditText
-        android:id="@+id/etMobilityMethod"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        android:hint="Método de movilidad"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:focusable="false"
-        android:background="@android:drawable/editbox_background" />
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etOtherOccupation"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="Especifique ocupación*"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
 
-      <EditText
-        android:id="@+id/etOtherMobilityMethod"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loMobilityMethod"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_marginBottom="15dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etMobilityMethod"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:drawableEnd="@drawable/ic_arrow_down"
+          android:ems="10"
+          android:focusable="false"
+          android:gravity="center_vertical"
+          android:hint="Método de movilidad"
+          android:inputType="none"
+          android:padding="12dp" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loOtherMobilityMethod"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:visibility="gone"
-        android:hint="Especifique metodo de mobilidad*"
-        android:inputType="textCapCharacters" />
-
-      <EditText
-        android:id="@+id/etDiseases"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        android:hint="Padecimientos, enfermedad o discapacidad"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:focusable="false"
-        android:background="@android:drawable/editbox_background" />
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etOtherMobilityMethod"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="Especifique metodo de mobilidad*"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
 
-      <EditText
-        android:id="@+id/etOtherDiseases"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loDiseases"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etDiseases"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:drawableEnd="@drawable/ic_arrow_down"
+          android:hint="Padecimientos, enfermedad o discapacidad"
+          android:focusable="false"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loOtherDiseases"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:visibility="gone"
-        android:hint="Especifique Padecimientos, enfermedad o discapacidad*"
-        android:inputType="textCapCharacters" />
-
-      <EditText
-        android:id="@+id/etFederalSupports"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        android:hint="¿Recibe apoyo federal?"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:focusable="false"
-        android:background="@android:drawable/editbox_background" />
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etOtherDiseases"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="Especifique Padecimientos, enfermedad o discapacidad*"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
 
-      <EditText
-        android:id="@+id/etOtherFederalSupport"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loFederalSupports"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etFederalSupports"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:drawableEnd="@drawable/ic_arrow_down"
+          android:focusable="false"
+          android:hint="¿Recibe apoyo federal?"
+          android:inputType="none" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loOtherFederalSupport"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:visibility="gone"
-        android:hint="Especifique apoyo federal*"
-        android:inputType="textCapCharacters" />
-
-      <EditText
-        android:id="@+id/etStateSupport"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        android:hint="¿Recibe apoyo estatal?"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:focusable="false"
-        android:background="@android:drawable/editbox_background" />
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etOtherFederalSupport"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="Especifique apoyo federal*"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
 
-      <EditText
-        android:id="@+id/etOtherStateSupport"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loStateSupport"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etStateSupport"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:drawableEnd="@drawable/ic_arrow_down"
+          android:focusable="false"
+          android:hint="¿Recibe apoyo estatal?"
+          android:inputType="none" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loOtherStateSupport"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:visibility="gone"
-        android:hint="Especifique apoyo estatal*"
-        android:inputType="textCapCharacters" />
-
-      <EditText
-        android:id="@+id/etMunicipalSupport"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        android:hint="¿Recibe apoyo municipal?"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:focusable="false"
-        android:background="@android:drawable/editbox_background" />
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etOtherStateSupport"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="Especifique apoyo estatal*"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
 
-      <EditText
-        android:id="@+id/etOtherMunicipalSupport"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loMunicipalSupport"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etMunicipalSupport"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:drawableEnd="@drawable/ic_arrow_down"
+          android:focusable="false"
+          android:hint="¿Recibe apoyo municipal?"
+          android:inputType="none" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loOtherMunicipalSupport"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:visibility="gone"
-        android:hint="Especifique apoyo municipal*"
-        android:inputType="textCapCharacters" />
-
-      <EditText
-        android:id="@+id/etHobbies"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        android:hint="Pasatiempos"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:focusable="false"
-        android:background="@android:drawable/editbox_background" />
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etOtherMunicipalSupport"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="Especifique apoyo municipal*"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
 
-      <EditText
-        android:id="@+id/etOtherHobbies"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loHobbies"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etHobbies"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:drawableEnd="@drawable/ic_arrow_down"
+          android:focusable="false"
+          android:hint="Pasatiempos"
+          android:inputType="none" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loOtherHobbies"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:visibility="gone"
-        android:hint="Especifique pasatiempos*"
-        android:inputType="textCapCharacters" />
-
-      <EditText
-        android:id="@+id/etReligions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        android:hint="Religión"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:focusable="false"
-        android:background="@android:drawable/editbox_background" />
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etOtherHobbies"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="Especifique pasatiempos*"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
 
-      <EditText
-        android:id="@+id/etOtherReligion"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loReligions"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etReligions"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:drawableEnd="@drawable/ic_arrow_down"
+          android:focusable="false"
+          android:hint="Religión"
+          android:inputType="none" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loOtherReligion"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:visibility="gone"
-        android:hint="Especifique religión*"
-        android:inputType="textCapCharacters" />
-
-      <EditText
-        android:id="@+id/etSports"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        android:hint="Deporte practicado"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:focusable="false"
-        android:background="@android:drawable/editbox_background" />
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etOtherReligion"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="Especifique religión*"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
 
-      <EditText
-        android:id="@+id/etOtherSport"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loSports"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etSports"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:drawableEnd="@drawable/ic_arrow_down"
+          android:focusable="false"
+          android:hint="Deporte practicado"
+          android:inputType="none" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loOtherSport"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:visibility="gone"
-        android:hint="Especifique deporte*"
-        android:inputType="textCapCharacters" />
-
-      <EditText
-        android:id="@+id/etSoccerTeam"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        android:hint="Equipo de fútbol"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:focusable="false"
-        android:background="@android:drawable/editbox_background" />
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <EditText
+          android:id="@+id/etOtherSport"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="Especifique deporte*"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loSoccerTeam"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <EditText
+          android:id="@+id/etSoccerTeam"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:drawableEnd="@drawable/ic_arrow_down"
+          android:focusable="false"
+          android:hint="Equipo de fútbol"
+          android:inputType="none" />
+      </com.google.android.material.textfield.TextInputLayout>
 
       <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/purple_500"
+        android:textStyle="bold"
         android:text="Gusto por las mascotas" />
 
       <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="15dp"
         android:orientation="horizontal">
 
         <RadioButton
           android:id="@+id/rLikesPets"
-          android:layout_width="130dp"
+          android:text="Si"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:checked="true"
-          android:text="Si" />
+          android:layout_weight="1"
+          android:layout_marginRight="25dp"
+          android:background="@drawable/radio_selector"
+          android:button="@android:color/transparent"
+          android:textAlignment="center"
+          android:textColor="@drawable/text_color"
+          android:checked="true" />
 
         <RadioButton
           android:id="@+id/rDontLikesPets"
-          android:layout_width="130dp"
+          android:text="No"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="No" />
+          android:layout_weight="1"
+          android:background="@drawable/radio_selector"
+          android:button="@android:color/transparent"
+          android:textAlignment="center"
+          android:textColor="@drawable/text_color" />
       </RadioGroup>
 
       <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/purple_500"
+        android:textStyle="bold"
         android:text="Tiene mascotas" />
 
       <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="15dp"
         android:orientation="horizontal">
 
         <RadioButton
           android:id="@+id/rHasPets"
-          android:layout_width="130dp"
+          android:text="Si"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:checked="true"
-          android:text="Si" />
+          android:layout_weight="1"
+          android:layout_marginRight="25dp"
+          android:background="@drawable/radio_selector"
+          android:button="@android:color/transparent"
+          android:textAlignment="center"
+          android:textColor="@drawable/text_color"
+          android:checked="true"  />
 
         <RadioButton
           android:id="@+id/rDoesntHasPets"
-          android:layout_width="130dp"
+          android:text="No"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="No" />
+          android:layout_weight="1"
+          android:background="@drawable/radio_selector"
+          android:button="@android:color/transparent"
+          android:textAlignment="center"
+          android:textColor="@drawable/text_color" />
       </RadioGroup>
 
-      <EditText
-        android:id="@+id/etPetType"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loPetType"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        android:hint="Tipo de mascotas"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:focusable="false"
-        android:background="@android:drawable/editbox_background" />
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etPetType"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:drawableEnd="@drawable/ic_arrow_down"
+          android:focusable="false"
+          android:hint="Tipo de mascotas"
+          android:inputType="none" />
+      </com.google.android.material.textfield.TextInputLayout>
 
-      <EditText
-        android:id="@+id/etOtherPetType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loOtherPetType"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:visibility="gone"
-        android:hint="Especifique tipo de mascotas*"
-        android:inputType="textCapCharacters" />
-
-      <EditText
-        android:id="@+id/etGovernmentInvitationActivityOrThemes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        android:hint="¿En qué actividad o tema te gustaría participar si te invita el gobierno municipal?"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:focusable="false"
-        android:background="@android:drawable/editbox_background" />
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etOtherPetType"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="Especifique tipo de mascotas*"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
 
-      <EditText
-        android:id="@+id/etOtherGovernmentInvitationActivityOrThemes"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loGovernmentInvitationActivityOrThemes"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etGovernmentInvitationActivityOrThemes"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:drawableEnd="@drawable/ic_arrow_down"
+          android:focusable="false"
+          android:hint="¿En qué actividad o tema te gustaría participar si te invita el gobierno municipal?"
+          android:inputType="none" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loOtherGovernmentInvitationActivityOrThemes"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:visibility="gone"
-        android:hint="Especifique que actividad o tema*"
-        android:inputType="textCapCharacters" />
-
-      <EditText
-        android:id="@+id/etGovernmentTaskActivityOrThemes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        android:hint="¿En qué actividad o tema te gustaría que el gobierno municipal hiciera énfasis?"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:focusable="false"
-        android:background="@android:drawable/editbox_background" />
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etOtherGovernmentInvitationActivityOrThemes"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="Especifique que actividad o tema*"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
 
-      <EditText
-        android:id="@+id/etPollutionCause"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loGovernmentTaskActivityOrThemes"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        android:hint="¿Cuál crees que es el factor principal de contaminación ambiental en Santa Catarina?"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:drawableEnd="@drawable/ic_arrow_down"
-        android:focusable="false"
-        android:background="@android:drawable/editbox_background" />
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etGovernmentTaskActivityOrThemes"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:drawableEnd="@drawable/ic_arrow_down"
+          android:focusable="false"
+          android:hint="¿En qué actividad o tema te gustaría que el gobierno municipal hiciera énfasis?"
+          android:inputType="none" />
+      </com.google.android.material.textfield.TextInputLayout>
 
-      <EditText
-        android:id="@+id/etPrincipalSectorProblematic"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loPollutionCause"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="¿Cuál es la principal problemática en tu sector?"
-        android:inputType="textCapCharacters" />
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etPollutionCause"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:drawableEnd="@drawable/ic_arrow_down"
+          android:focusable="false"
+          android:hint="¿Cuál crees que es el factor principal de contaminación ambiental en Santa Catarina?"
+          android:inputType="none" />
+      </com.google.android.material.textfield.TextInputLayout>
 
-      <EditText
-        android:id="@+id/etFutureFiveYears"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loPrincipalSectorProblematic"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="¿En dónde te ves en 5 años?"
-        android:inputType="textCapCharacters" />
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etPrincipalSectorProblematic"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="¿Cuál es la principal problemática en tu sector?"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
 
-      <EditText
-        android:id="@+id/etComments"
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loFutureFiveYears"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Comentarios"
-        android:inputType="textMultiLine" />
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etFutureFiveYears"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="¿En dónde te ves en 5 años?"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loComments"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:textColorHint="@color/purple_500"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etComments"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="Comentarios"
+          android:inputType="textMultiLine" />
+      </com.google.android.material.textfield.TextInputLayout>
 
       <Button
         android:id="@+id/btnEnviar"

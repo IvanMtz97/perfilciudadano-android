@@ -1,101 +1,63 @@
 package com.example.perfilciudadano.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.example.perfilciudadano.R
 import com.example.perfilciudadano.providers.PollProvider
 import com.example.perfilciudadano.viewmodel.*
+import com.journeyapps.barcodescanner.ScanContract
+import com.journeyapps.barcodescanner.ScanOptions
+import com.journeyapps.barcodescanner.ScanIntentResult
+
 
 class NewPollFormFragment : Fragment() {
   private lateinit var pollView: View
   private val pollViewModel: PollViewModel by activityViewModels()
-  private val sectionsViewModel: SectionsViewModel by activityViewModels()
-  private val zipCodesViewModel: ZipCodesViewModel by activityViewModels()
-  private val coloniesViewModel: ColoniesViewModel by activityViewModels()
-  private val maritalStatusesViewModel: MaritalStatusesViewModel by activityViewModels()
-  private val familyPositionsViewModel: FamilyPositionsViewModel by activityViewModels()
-  private val studyDegreesViewModel: StudyDegreesViewModel by activityViewModels()
-  private val occupationsViewModel: OccupationsViewModel by activityViewModels()
-  private val mobilityMethodsViewModel: MobilityMethodsViewModel by activityViewModels()
-  private val diseasesViewModel: DiseasesViewModel by activityViewModels()
-  private val federalSupportsViewModel: FederalSupportsViewModel by activityViewModels()
-  private val stateSupportsViewModel: StateSupportsViewModel by activityViewModels()
-  private val municipalSupportsViewModel: MunicipalSupportsViewModel by activityViewModels()
-  private val hobbiesViewModel: HobbiesViewModel by activityViewModels()
-  private val religionsViewModel: ReligionsViewModel by activityViewModels()
-  private val sportsViewModel: SportsViewModel by activityViewModels()
-  private val soccerTeamsViewModel: SoccerTeamsViewModel by activityViewModels()
-  private val petTypesViewModel: PetTypesViewModel by activityViewModels()
-  private val governmentInvitationActivityOrThemesViewModel: GovernmentInvitationActivityOrThemesViewModel by activityViewModels()
-  private val governmentTaskActivityOrThemesViewModel: GovernmentTaskActivityOrThemesViewModel by activityViewModels()
-  private val pollutionCausesViewModel: PollutionCausesViewModel by activityViewModels()
+  private val optionsViewModel: OptionsViewModel by activityViewModels()
+
+  private val barcodeLauncher = registerForActivityResult(
+    ScanContract()
+  ) { result: ScanIntentResult ->
+    if (result.contents == null) {
+      Toast.makeText(requireContext(), "Cancelled", Toast.LENGTH_LONG).show()
+    } else {
+      Log.e("SCANNN", result.contents.toString())
+      Toast.makeText(requireContext(), "Scanned: " + result.contents, Toast.LENGTH_LONG)
+        .show()
+    }
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    zipCodesViewModel.zipCodes.observe(this, { item ->
-      PollProvider.bindZipCodeInput(requireContext(), pollView, item, pollViewModel, zipCodesViewModel)
+    optionsViewModel.colonies.observe(this, {
+      PollProvider.bindColonyInput(requireContext(), pollView, it, pollViewModel)
     })
-    sectionsViewModel.sections.observe(this, { item ->
-      PollProvider.bindSectionInput(requireContext(), pollView, item, pollViewModel, sectionsViewModel)
-    })
-    coloniesViewModel.colonies.observe(this, { item ->
-      PollProvider.bindColonyInput(requireContext(), pollView, item, pollViewModel, coloniesViewModel)
-    })
-    maritalStatusesViewModel.maritalStatuses.observe(this, { item ->
-      PollProvider.bindMaritalStatusInput(requireContext(), pollView, item, pollViewModel, maritalStatusesViewModel)
-    })
-    familyPositionsViewModel.familyPositions.observe(this, { item ->
-      PollProvider.bindFamilyPositionsInput(requireContext(), pollView, item, pollViewModel, familyPositionsViewModel)
-    })
-    studyDegreesViewModel.studyDegrees.observe(this, { item ->
-      PollProvider.bindStudyDegreeInput(requireContext(), pollView, item, pollViewModel, studyDegreesViewModel)
-    })
-    occupationsViewModel.occupations.observe(this, { item ->
-      PollProvider.bindOccupationsInput(requireContext(), pollView, item, pollViewModel, occupationsViewModel)
-    })
-    mobilityMethodsViewModel.mobilityMethods.observe(this, { item ->
-      PollProvider.bindMobilityMethodsInput(requireContext(), pollView, item, pollViewModel, mobilityMethodsViewModel)
-    })
-    diseasesViewModel.diseases.observe(this, { items ->
-      PollProvider.bindDiseasesInput(requireContext(), pollView, items, pollViewModel, diseasesViewModel)
-    })
-    federalSupportsViewModel.federalSupports.observe(this, { items ->
-      PollProvider.bindFederalSupportsInput(requireContext(), pollView, items, pollViewModel, federalSupportsViewModel)
-    })
-    stateSupportsViewModel.stateSupports.observe(this, { items ->
-      PollProvider.bindStateSupportsInput(requireContext(), pollView, items, pollViewModel, stateSupportsViewModel)
-    })
-    municipalSupportsViewModel.municipalSupports.observe(this, { items ->
-      PollProvider.bindMunicipalSupportsInput(requireContext(), pollView, items, pollViewModel, municipalSupportsViewModel)
-    })
-    hobbiesViewModel.hobbies.observe(this, { items ->
-      PollProvider.bindHobbiesInput(requireContext(), pollView, items, pollViewModel, hobbiesViewModel)
-    })
-    religionsViewModel.religions.observe(this, { items ->
-      PollProvider.bindReligionsInput(requireContext(), pollView, items, pollViewModel, religionsViewModel)
-    })
-    sportsViewModel.sports.observe(this, { items ->
-      PollProvider.bindSportsInput(requireContext(), pollView, items, pollViewModel, sportsViewModel)
-    })
-    soccerTeamsViewModel.soccerTeams.observe(this, { item ->
-      PollProvider.bindSoccerTeamsInput(requireContext(), pollView, item, pollViewModel, soccerTeamsViewModel)
-    })
-    petTypesViewModel.petTypes.observe(this, { item ->
-      PollProvider.bindPetTypesInput(requireContext(), pollView, item, pollViewModel, petTypesViewModel)
-    })
-    governmentInvitationActivityOrThemesViewModel.options.observe(this, { items ->
-      PollProvider.bindGovernmentInvitationActivityOrThemesInput(requireContext(), pollView, items, pollViewModel, governmentInvitationActivityOrThemesViewModel)
-    })
-    governmentTaskActivityOrThemesViewModel.options.observe(this, { items ->
-      PollProvider.bindGovernmentTaskActivityOrThemesInput(requireContext(), pollView, items, pollViewModel, governmentTaskActivityOrThemesViewModel)
-    })
-    pollutionCausesViewModel.options.observe(this, { items ->
-      PollProvider.bindPollutionCauseInput(requireContext(), pollView, items, pollViewModel, pollutionCausesViewModel)
+    optionsViewModel.options.observe(this, { items ->
+      PollProvider.bindSectionInput(requireContext(), pollView, items.filter { it.type == "Section" }, pollViewModel)
+      PollProvider.bindMaritalStatusInput(requireContext(), pollView, items.filter { it.type == "MaritalStatus" }, pollViewModel)
+      PollProvider.bindFamilyPositionsInput(requireContext(), pollView, items.filter { it.type == "FamilyPosition" }, pollViewModel)
+      PollProvider.bindStudyDegreeInput(requireContext(), pollView, items.filter { it.type == "StudyDegree" }, pollViewModel)
+      PollProvider.bindOccupationsInput(requireContext(), pollView, items.filter { it.type == "Occupation" }, pollViewModel)
+      PollProvider.bindMobilityMethodsInput(requireContext(), pollView, items.filter { it.type == "MobilityMethod" }, pollViewModel)
+      PollProvider.bindDiseasesInput(requireContext(), pollView, items.filter { it.type == "Disease" }, pollViewModel)
+      PollProvider.bindFederalSupportsInput(requireContext(), pollView, items.filter { it.type == "FederalSupport" }, pollViewModel)
+      PollProvider.bindStateSupportsInput(requireContext(), pollView, items.filter { it.type == "StateSupport" }, pollViewModel)
+      PollProvider.bindMunicipalSupportsInput(requireContext(), pollView, items.filter { it.type == "MunicipalSupport" }, pollViewModel)
+      PollProvider.bindHobbiesInput(requireContext(), pollView, items.filter { it.type == "Hobby" }, pollViewModel)
+      PollProvider.bindReligionsInput(requireContext(), pollView, items.filter { it.type == "Religion" }, pollViewModel)
+      PollProvider.bindSportsInput(requireContext(), pollView, items.filter { it.type == "Sport" }, pollViewModel)
+      PollProvider.bindSoccerTeamsInput(requireContext(), pollView, items.filter { it.type == "SoccerTeam" }, pollViewModel)
+      PollProvider.bindPetTypesInput(requireContext(), pollView, items.filter { it.type == "PetType" }, pollViewModel)
+      PollProvider.bindGovernmentInvitationActivityOrThemesInput(requireContext(), pollView, items.filter { it.type == "GovernmentInvitationActivitiesOrTheme" }, pollViewModel)
+      PollProvider.bindGovernmentTaskActivityOrThemesInput(requireContext(), pollView, items.filter { it.type == "GovernmentTaskActivitiesOrTheme" }, pollViewModel)
+      PollProvider.bindPollutionCauseInput(requireContext(), pollView, items.filter { it.type == "PollutionCause" }, pollViewModel)
     })
   }
 
@@ -107,9 +69,9 @@ class NewPollFormFragment : Fragment() {
     val sendButton = view.findViewById<Button>(R.id.btnEnviar)
     val btnIneScan = view.findViewById<Button>(R.id.btnIneScan)
     pollView = view
-    // TODO: Implement elector key validation with regex or length
-    // TODO: Implement CURP validation with regex
     // TODO: Implement date picker for BirthDate
+    // TODO: Show selected options on multiple options dialog
+    // TODO: Fix close button visibility on multiple options dialog, options list is pushing button outside of visible area at the bottom
     PollProvider.bindElectorKeyInput(view, pollViewModel)
     PollProvider.bindCurpInput(view, pollViewModel)
     PollProvider.bindNameInput(view, pollViewModel)
@@ -118,6 +80,7 @@ class NewPollFormFragment : Fragment() {
     PollProvider.bindBirthDateInput(view, pollViewModel)
     PollProvider.bindBirthPlaceInput(view, pollViewModel)
     PollProvider.bindIneExpirationYearInput(view, pollViewModel)
+    PollProvider.bindZipCodeInput(view, pollViewModel, optionsViewModel)
     PollProvider.bindGenderInput(view, pollViewModel)
     PollProvider.bindStreetInput(view, pollViewModel)
     PollProvider.bindExteriorNumberInput(view, pollViewModel)
@@ -144,9 +107,22 @@ class NewPollFormFragment : Fragment() {
     PollProvider.bindPrincipalSectorProblematicInput(view, pollViewModel)
     PollProvider.bindFutureFiveYearsInput(view, pollViewModel)
     PollProvider.bindCommentsInput(view, pollViewModel)
+    btnIneScan.setOnClickListener {
+      initScanner()
+    }
     sendButton.setOnClickListener {
       PollProvider.sendPoll(pollViewModel)
     }
     return view
+  }
+
+  private fun initScanner() {
+    Log.e("INIT SCAN", "INIT")
+    val options = ScanOptions()
+
+    options.setDesiredBarcodeFormats(ScanOptions.QR_CODE)
+    options.setPrompt("Coloca la credencial al centro de la camara")
+    options.setBeepEnabled(true)
+    barcodeLauncher.launch(options)
   }
 }
