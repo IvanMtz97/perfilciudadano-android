@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -11,6 +12,7 @@ import android.widget.ListView
 import android.widget.RadioButton
 import androidx.core.widget.doOnTextChanged
 import com.example.perfilciudadano.R
+import com.example.perfilciudadano.adapters.MultipleOptionsAdapter
 import com.example.perfilciudadano.adapters.OptionsAdapter
 import com.example.perfilciudadano.models.Option
 import com.example.perfilciudadano.models.Poll
@@ -23,6 +25,179 @@ class PollProvider {
   companion object {
     private var poll: Poll = Poll()
     private const val OtherOption = "Otro (especificar)"
+
+    fun bindSingleOptionInput(
+      context: Context,
+      data: List<Option>,
+      pollViewModel: PollViewModel,
+      input: EditText,
+      onSelect: (selectedOption: Option) -> Unit,
+      onValidate: () -> Unit,
+    ) {
+      var selectedOption: Option = Option(-1, "", "", false)
+      input.setOnClickListener {
+        val dialog = Dialog(context)
+        dialog.setContentView(R.layout.searchable_list)
+        dialog.window?.setLayout(650, 800)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+        val searchText: EditText = dialog.findViewById(R.id.searchEt)
+        val searchList: ListView = dialog.findViewById(R.id.searchList)
+        var adapter = OptionsAdapter(context, selectedOption.id, data)
+        searchList.adapter = adapter
+        dialog.setOnDismissListener {
+          onValidate()
+        }
+        searchText.doOnTextChanged { text, start, before, count ->
+          adapter.filter.filter(text)
+        }
+        searchList.setOnItemClickListener { adapterView, view, i, l ->
+          val item = adapter.getItem(i)
+          item?.let {
+            input.setText(item.name)
+            onSelect(item)
+            pollViewModel.updatePoll(poll)
+            onValidate()
+            selectedOption = item
+            adapter = OptionsAdapter(context, item.id, data)
+            searchList.adapter = adapter
+            dialog.dismiss()
+          }
+        }
+      }
+    }
+
+    fun bindSingleOptionWithOtherInput(
+      context: Context,
+      data: List<Option>,
+      pollViewModel: PollViewModel,
+      input: EditText,
+      otherInput: TextInputLayout,
+      onSelect: (selectedOption: Option) -> Unit,
+      onValidate: () -> Unit,
+    ) {
+      var selectedOption: Option = Option(-1, "", "", false)
+      input.setOnClickListener {
+        val dialog = Dialog(context)
+        dialog.setContentView(R.layout.unsearchable_list)
+        dialog.window?.setLayout(650, 800)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+        val searchList: ListView = dialog.findViewById(R.id.searchList)
+        var adapter = OptionsAdapter(context, selectedOption.id, data)
+        searchList.adapter = adapter
+        dialog.setOnDismissListener {
+          onValidate()
+        }
+        searchList.setOnItemClickListener { adapterView, view, i, l ->
+          val item = adapter.getItem(i)
+          item?.let {
+            input.setText(item.name)
+            onSelect(item)
+            pollViewModel.updatePoll(poll)
+            if (item.name == OtherOption) {
+              otherInput.visibility = View.VISIBLE
+            } else {
+              otherInput.visibility = View.GONE
+            }
+            onValidate()
+            selectedOption = item
+            adapter = OptionsAdapter(context, selectedOption.id, data)
+            searchList.adapter = adapter
+            dialog.dismiss()
+          }
+        }
+      }
+    }
+
+    fun bindMultipleOptionsInput(
+      context: Context,
+      data: List<Option>,
+      pollViewModel: PollViewModel,
+      input: EditText,
+      onSelect: (selectedOptions: List<Option>) -> Unit,
+    ) {
+      val selectedOptions: MutableList<Option> = mutableListOf()
+      input.setOnClickListener {
+        val dialog = Dialog(context)
+        dialog.setContentView(R.layout.dismissable_unsearchable_list)
+        dialog.window?.setLayout(650, 800)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+        val searchList: ListView = dialog.findViewById(R.id.searchList)
+        val dismissButton = dialog.findViewById<Button>(R.id.dismissButton)
+        var adapter = MultipleOptionsAdapter(context, selectedOptions.map { it.id }, data)
+        searchList.adapter = adapter
+        searchList.setOnItemClickListener { adapterView, view, i, l ->
+          val item = adapter.getItem(i)
+          item?.let { it ->
+            val itemIndex = selectedOptions.indexOf(it)
+            if (itemIndex == -1) {
+              selectedOptions.add(it)
+            } else {
+              selectedOptions.removeAt(itemIndex)
+            }
+            onSelect(selectedOptions)
+            pollViewModel.updatePoll(poll)
+            input.setText(selectedOptions.joinToString(", ") { it.name })
+            adapter = MultipleOptionsAdapter(context, selectedOptions.map { it.id }, data)
+            searchList.adapter = adapter
+          }
+        }
+        dismissButton.setOnClickListener {
+          dialog.dismiss()
+        }
+      }
+    }
+
+    fun bindMultipleOptionsWithOtherInput(
+      context: Context,
+      data: List<Option>,
+      pollViewModel: PollViewModel,
+      input: EditText,
+      otherInput: TextInputLayout?,
+      onSelect: (selectedOptions: List<Option>) -> Unit,
+    ) {
+      val selectedOptions: MutableList<Option> = mutableListOf()
+      input.setOnClickListener {
+        val dialog = Dialog(context)
+        dialog.setContentView(R.layout.dismissable_unsearchable_list)
+        dialog.window?.setLayout(650, 800)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+        val searchList: ListView = dialog.findViewById(R.id.searchList)
+        val dismissButton = dialog.findViewById<Button>(R.id.dismissButton)
+        var adapter = MultipleOptionsAdapter(context, selectedOptions.map { it.id }, data)
+        searchList.adapter = adapter
+        searchList.setOnItemClickListener { adapterView, view, i, l ->
+          val item = adapter.getItem(i)
+          item?.let { it ->
+            val itemIndex = selectedOptions.indexOf(it)
+            if (itemIndex == -1) {
+              selectedOptions.add(it)
+            } else {
+              selectedOptions.removeAt(itemIndex)
+            }
+            onSelect(selectedOptions)
+            pollViewModel.updatePoll(poll)
+            input.setText(selectedOptions.joinToString(", ") { it.name })
+            adapter = MultipleOptionsAdapter(context, selectedOptions.map { it.id }, data)
+            searchList.adapter = adapter
+          }
+          otherInput?.let {
+            val isOtherSelected = selectedOptions.any { it.isOtherOption }
+            if (isOtherSelected) {
+              otherInput.visibility = View.VISIBLE
+            } else {
+              otherInput.visibility = View.GONE
+            }
+          }
+        }
+        dismissButton.setOnClickListener {
+          dialog.dismiss()
+        }
+      }
+    }
 
     fun bindElectorKeyInput(view: View, pollViewModel: PollViewModel) {
       val electorKeyInput = view.findViewById<TextInputEditText>(R.id.etElectorKey)
@@ -137,35 +312,16 @@ class PollProvider {
       data: List<Option>,
       pollViewModel: PollViewModel,
     ) {
-      val sectionInput = view.findViewById<EditText>(R.id.etSection)
+      val input = view.findViewById<EditText>(R.id.etSection)
       val layout = view.findViewById<TextInputLayout>(R.id.loSection)
-      sectionInput.setOnClickListener {
-        val dialog = Dialog(context)
-        dialog.setContentView(R.layout.searchable_list)
-        dialog.window?.setLayout(650, 800)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-        val searchText: EditText = dialog.findViewById(R.id.searchEt)
-        val searchList: ListView = dialog.findViewById(R.id.searchList)
-        val adapter = OptionsAdapter(context, R.layout.option_layout, data)
-        searchList.adapter = adapter
-        dialog.setOnDismissListener {
-          validations.validateSelectionInput(poll.Section, layout, pollViewModel, "Section")
-        }
-        searchText.doOnTextChanged { text, start, before, count ->
-          adapter.filter.filter(text)
-        }
-        searchList.setOnItemClickListener { adapterView, view, i, l ->
-          val item = adapter.getItem(i)
-          item?.let {
-            sectionInput.setText(item.name)
-            poll.Section = item.id
-            pollViewModel.updatePoll(poll)
-            validations.validateSelectionInput(poll.Section, layout, pollViewModel, "Section")
-            dialog.dismiss()
-          }
-        }
-      }
+      bindSingleOptionInput(
+        context,
+        data,
+        pollViewModel,
+        input,
+        { poll.Section = it.id },
+        { validations.validateSelectionInput(poll.Section, layout, pollViewModel, "Section") },
+      )
     }
 
     fun bindColonyInput(
@@ -174,31 +330,16 @@ class PollProvider {
       data: List<Option>,
       pollViewModel: PollViewModel,
     ) {
-      val colonyInput = view.findViewById<EditText>(R.id.etColony)
+      val input = view.findViewById<EditText>(R.id.etColony)
       val layout = view.findViewById<TextInputLayout>(R.id.loColony)
-      colonyInput.setOnClickListener {
-        val dialog = Dialog(context)
-        dialog.setContentView(R.layout.unsearchable_list)
-        dialog.window?.setLayout(650, 800)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-        val searchList: ListView = dialog.findViewById(R.id.searchList)
-        val adapter = OptionsAdapter(context, R.layout.option_layout, data)
-        searchList.adapter = adapter
-        dialog.setOnDismissListener {
-          validations.validateSelectionInput(poll.Colony, layout, pollViewModel, "Colony")
-        }
-        searchList.setOnItemClickListener { adapterView, view, i, l ->
-          val item = adapter.getItem(i)
-          item?.let {
-            colonyInput.setText(item.name)
-            poll.Colony = item.id
-            pollViewModel.updatePoll(poll)
-            validations.validateSelectionInput(poll.Colony, layout, pollViewModel, "Colony")
-            dialog.dismiss()
-          }
-        }
-      }
+      bindSingleOptionInput(
+        context,
+        data,
+        pollViewModel,
+        input,
+        { poll.Colony = it.id },
+        { validations.validateSelectionInput(poll.Colony, layout, pollViewModel, "Colony") },
+      )
     }
 
     fun bindStreetInput(view: View, pollViewModel: PollViewModel) {
@@ -252,31 +393,16 @@ class PollProvider {
       data: List<Option>,
       pollViewModel: PollViewModel,
     ) {
-      val maritalStatusInput = view.findViewById<EditText>(R.id.etMaritalStatus)
+      val input = view.findViewById<EditText>(R.id.etMaritalStatus)
       val layout = view.findViewById<TextInputLayout>(R.id.loMaritalStatus)
-      maritalStatusInput.setOnClickListener {
-        val dialog = Dialog(context)
-        dialog.setContentView(R.layout.unsearchable_list)
-        dialog.window?.setLayout(650, 800)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-        val searchList: ListView = dialog.findViewById(R.id.searchList)
-        val adapter = OptionsAdapter(context, R.layout.option_layout, data)
-        searchList.adapter = adapter
-        dialog.setOnDismissListener {
-          validations.validateSelectionInput(poll.MaritalStatus, layout, pollViewModel, "MaritalStatus")
-        }
-        searchList.setOnItemClickListener { adapterView, view, i, l ->
-          val item = adapter.getItem(i)
-          item?.let {
-            maritalStatusInput.setText(item.name)
-            poll.MaritalStatus = item.id
-            pollViewModel.updatePoll(poll)
-            validations.validateSelectionInput(poll.MaritalStatus, layout, pollViewModel, "MaritalStatus")
-            dialog.dismiss()
-          }
-        }
-      }
+      bindSingleOptionInput(
+        context,
+        data,
+        pollViewModel,
+        input,
+        { poll.MaritalStatus = it.id },
+        { validations.validateSelectionInput(poll.MaritalStatus, layout, pollViewModel, "MaritalStatus") },
+      )
     }
 
     fun bindFamilyPositionsInput(
@@ -285,37 +411,18 @@ class PollProvider {
       data: List<Option>,
       pollViewModel: PollViewModel,
     ) {
-      val familyPositionsInput = view.findViewById<EditText>(R.id.etFamilyPosition)
+      val input = view.findViewById<EditText>(R.id.etFamilyPosition)
       val layout = view.findViewById<TextInputLayout>(R.id.loFamilyPosition)
-      val otherFamilyPositionInput = view.findViewById<EditText>(R.id.etOtherFamilyPosition)
-      familyPositionsInput.setOnClickListener {
-        val dialog = Dialog(context)
-        dialog.setContentView(R.layout.unsearchable_list)
-        dialog.window?.setLayout(650, 800)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-        val searchList: ListView = dialog.findViewById(R.id.searchList)
-        val adapter = OptionsAdapter(context, R.layout.option_layout, data)
-        searchList.adapter = adapter
-        dialog.setOnDismissListener {
-          validations.validateSelectionInput(poll.FamilyPosition, layout, pollViewModel, "FamilyPosition")
-        }
-        searchList.setOnItemClickListener { adapterView, view, i, l ->
-          val item = adapter.getItem(i)
-          item?.let {
-            familyPositionsInput.setText(item.name)
-            poll.FamilyPosition = item.id
-            pollViewModel.updatePoll(poll)
-            if (item.name == OtherOption) {
-              otherFamilyPositionInput.visibility = View.VISIBLE
-            } else {
-              otherFamilyPositionInput.visibility = View.GONE
-            }
-            validations.validateSelectionInput(poll.FamilyPosition, layout, pollViewModel, "FamilyPosition")
-            dialog.dismiss()
-          }
-        }
-      }
+      val otherInput = view.findViewById<TextInputLayout>(R.id.loOtherFamilyPosition)
+      bindSingleOptionWithOtherInput(
+        context,
+        data,
+        pollViewModel,
+        input,
+        otherInput,
+        { poll.FamilyPosition = it.id },
+        { validations.validateSelectionInput(poll.FamilyPosition, layout, pollViewModel, "FamilyPosition") },
+      )
     }
 
     fun bindOtherFamilyPositionInput(view: View, pollViewModel: PollViewModel) {
@@ -385,26 +492,15 @@ class PollProvider {
       data: List<Option>,
       pollViewModel: PollViewModel,
     ) {
-      val studyDegreeInput = view.findViewById<EditText>(R.id.etStudyDegree)
-      studyDegreeInput.setOnClickListener {
-        val dialog = Dialog(context)
-        dialog.setContentView(R.layout.unsearchable_list)
-        dialog.window?.setLayout(650, 800)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-        val searchList: ListView = dialog.findViewById(R.id.searchList)
-        val adapter = OptionsAdapter(context, R.layout.option_layout, data)
-        searchList.adapter = adapter
-        searchList.setOnItemClickListener { adapterView, view, i, l ->
-          val item = adapter.getItem(i)
-          item?.let {
-            studyDegreeInput.setText(item.name)
-            poll.StudyDegree = item.id
-            pollViewModel.updatePoll(poll)
-            dialog.dismiss()
-          }
-        }
-      }
+      val input = view.findViewById<EditText>(R.id.etStudyDegree)
+      bindSingleOptionInput(
+        context,
+        data,
+        pollViewModel,
+        input,
+        { poll.StudyDegree = it.id },
+        {  },
+      )
     }
 
     fun bindOccupationsInput(
@@ -413,32 +509,17 @@ class PollProvider {
       data: List<Option>,
       pollViewModel: PollViewModel,
     ) {
-      val occupationsInput = view.findViewById<EditText>(R.id.etOccupation)
-      val layout = view.findViewById<TextInputLayout>(R.id.loOtherOccupation)
-      occupationsInput.setOnClickListener {
-        val dialog = Dialog(context)
-        dialog.setContentView(R.layout.unsearchable_list)
-        dialog.window?.setLayout(650, 800)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-        val searchList: ListView = dialog.findViewById(R.id.searchList)
-        val adapter = OptionsAdapter(context, R.layout.option_layout, data)
-        searchList.adapter = adapter
-        searchList.setOnItemClickListener { adapterView, view, i, l ->
-          val item = adapter.getItem(i)
-          item?.let {
-            occupationsInput.setText(item.name)
-            poll.Occupation = item.id
-            pollViewModel.updatePoll(poll)
-            if (item.isOtherOption) {
-              layout.visibility = View.VISIBLE
-            } else {
-              layout.visibility = View.GONE
-            }
-            dialog.dismiss()
-          }
-        }
-      }
+      val input = view.findViewById<EditText>(R.id.etOccupation)
+      val otherInput = view.findViewById<TextInputLayout>(R.id.loOtherOccupation)
+      bindSingleOptionWithOtherInput(
+        context,
+        data,
+        pollViewModel,
+        input,
+        otherInput,
+        { poll.Occupation = it.id },
+        {  },
+      )
     }
 
     fun bindOtherOccupationInput(view: View, pollViewModel: PollViewModel) {
@@ -455,32 +536,17 @@ class PollProvider {
       data: List<Option>,
       pollViewModel: PollViewModel,
     ) {
-      val mobilityMethodsInput = view.findViewById<EditText>(R.id.etMobilityMethod)
-      val layout = view.findViewById<TextInputLayout>(R.id.loOtherMobilityMethod)
-      mobilityMethodsInput.setOnClickListener {
-        val dialog = Dialog(context)
-        dialog.setContentView(R.layout.unsearchable_list)
-        dialog.window?.setLayout(650, 800)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-        val searchList: ListView = dialog.findViewById(R.id.searchList)
-        val adapter = OptionsAdapter(context, R.layout.option_layout, data)
-        searchList.adapter = adapter
-        searchList.setOnItemClickListener { adapterView, view, i, l ->
-          val item = adapter.getItem(i)
-          item?.let {
-            mobilityMethodsInput.setText(item.name)
-            poll.MobilityMethod = item.id
-            pollViewModel.updatePoll(poll)
-            if (item.isOtherOption) {
-              layout.visibility = View.VISIBLE
-            } else {
-              layout.visibility = View.GONE
-            }
-            dialog.dismiss()
-          }
-        }
-      }
+      val input = view.findViewById<EditText>(R.id.etMobilityMethod)
+      val otherInput = view.findViewById<TextInputLayout>(R.id.loOtherMobilityMethod)
+      bindSingleOptionWithOtherInput(
+        context,
+        data,
+        pollViewModel,
+        input,
+        otherInput,
+        { poll.MobilityMethod = it.id },
+        {  },
+      )
     }
 
     fun bindOtherMobilityMethodInput(view: View, pollViewModel: PollViewModel) {
@@ -499,40 +565,8 @@ class PollProvider {
     ) {
       val diseasesInput = view.findViewById<EditText>(R.id.etDiseases)
       val otherDiseasesInput = view.findViewById<TextInputLayout>(R.id.loOtherDiseases)
-      val selectedOptions: MutableList<Option> = mutableListOf()
-      diseasesInput.setOnClickListener {
-        val dialog = Dialog(context)
-        dialog.setContentView(R.layout.dismissable_unsearchable_list)
-        dialog.window?.setLayout(650, 800)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-        val searchList: ListView = dialog.findViewById(R.id.searchList)
-        val dismissButton = dialog.findViewById<Button>(R.id.dismissButton)
-        val adapter = OptionsAdapter(context, R.layout.option_layout, data)
-        searchList.adapter = adapter
-        searchList.setOnItemClickListener { adapterView, view, i, l ->
-          val item = adapter.getItem(i)
-          item?.let { it ->
-            val itemIndex = selectedOptions.indexOf(it)
-            if (itemIndex == -1) {
-              selectedOptions.add(it)
-            } else {
-              selectedOptions.removeAt(itemIndex)
-            }
-            poll.Diseases = selectedOptions.map { selectedOption -> selectedOption.id }
-            pollViewModel.updatePoll(poll)
-            diseasesInput.setText(selectedOptions.joinToString(", ") { it.name })
-          }
-          val isOtherSelected = selectedOptions.any { it.isOtherOption }
-          if (isOtherSelected) {
-            otherDiseasesInput.visibility = View.VISIBLE
-          } else {
-            otherDiseasesInput.visibility = View.GONE
-          }
-        }
-        dismissButton.setOnClickListener {
-          dialog.dismiss()
-        }
+      bindMultipleOptionsWithOtherInput(context, data, pollViewModel, diseasesInput, otherDiseasesInput) {
+        poll.Diseases = it.map { it.id }
       }
     }
 
@@ -552,40 +586,8 @@ class PollProvider {
     ) {
       val federalSupportsInput = view.findViewById<EditText>(R.id.etFederalSupports)
       val otherFederalSupportsInput = view.findViewById<TextInputLayout>(R.id.loOtherFederalSupport)
-      val selectedOptions: MutableList<Option> = mutableListOf()
-      federalSupportsInput.setOnClickListener {
-        val dialog = Dialog(context)
-        dialog.setContentView(R.layout.dismissable_unsearchable_list)
-        dialog.window?.setLayout(650, 800)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-        val searchList: ListView = dialog.findViewById(R.id.searchList)
-        val dismissButton = dialog.findViewById<Button>(R.id.dismissButton)
-        val adapter = OptionsAdapter(context, R.layout.option_layout, data)
-        searchList.adapter = adapter
-        searchList.setOnItemClickListener { adapterView, view, i, l ->
-          val item = adapter.getItem(i)
-          item?.let { it ->
-            val itemIndex = selectedOptions.indexOf(it)
-            if (itemIndex == -1) {
-              selectedOptions.add(it)
-            } else {
-              selectedOptions.removeAt(itemIndex)
-            }
-            poll.FederalSupports = selectedOptions.map { selectedOption -> selectedOption.id }
-            pollViewModel.updatePoll(poll)
-            federalSupportsInput.setText(selectedOptions.joinToString(", ") { it.name })
-          }
-          val isOtherSelected = selectedOptions.any { it.isOtherOption }
-          if (isOtherSelected) {
-            otherFederalSupportsInput.visibility = View.VISIBLE
-          } else {
-            otherFederalSupportsInput.visibility = View.GONE
-          }
-        }
-        dismissButton.setOnClickListener {
-          dialog.dismiss()
-        }
+      bindMultipleOptionsWithOtherInput(context, data, pollViewModel, federalSupportsInput, otherFederalSupportsInput) {
+        poll.FederalSupports = it.map { it.id }
       }
     }
 
@@ -605,40 +607,8 @@ class PollProvider {
     ) {
       val stateSupportsInput = view.findViewById<EditText>(R.id.etStateSupport)
       val otherStateSupportsInput = view.findViewById<TextInputLayout>(R.id.loOtherStateSupport)
-      val selectedOptions: MutableList<Option> = mutableListOf()
-      stateSupportsInput.setOnClickListener {
-        val dialog = Dialog(context)
-        dialog.setContentView(R.layout.dismissable_unsearchable_list)
-        dialog.window?.setLayout(650, 800)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-        val searchList: ListView = dialog.findViewById(R.id.searchList)
-        val dismissButton = dialog.findViewById<Button>(R.id.dismissButton)
-        val adapter = OptionsAdapter(context, R.layout.option_layout, data)
-        searchList.adapter = adapter
-        searchList.setOnItemClickListener { adapterView, view, i, l ->
-          val item = adapter.getItem(i)
-          item?.let {
-            val itemIndex = selectedOptions.indexOf(it)
-            if (itemIndex == -1) {
-              selectedOptions.add(it)
-            } else {
-              selectedOptions.removeAt(itemIndex)
-            }
-            poll.StateSupports = selectedOptions.map { it.id }
-            pollViewModel.updatePoll(poll)
-            stateSupportsInput.setText(selectedOptions.joinToString(", ") { it.name })
-          }
-          val isOtherSelected = selectedOptions.any { it.isOtherOption }
-          if (isOtherSelected) {
-            otherStateSupportsInput.visibility = View.VISIBLE
-          } else {
-            otherStateSupportsInput.visibility = View.GONE
-          }
-        }
-        dismissButton.setOnClickListener {
-          dialog.dismiss()
-        }
+      bindMultipleOptionsWithOtherInput(context, data, pollViewModel, stateSupportsInput, otherStateSupportsInput) {
+        poll.StateSupports = it.map { it.id }
       }
     }
 
@@ -658,40 +628,8 @@ class PollProvider {
     ) {
       val municipalSupportsInput = view.findViewById<EditText>(R.id.etMunicipalSupport)
       val otherMunicipalSupportsInput = view.findViewById<TextInputLayout>(R.id.loOtherMunicipalSupport)
-      val selectedOptions: MutableList<Option> = mutableListOf()
-      municipalSupportsInput.setOnClickListener {
-        val dialog = Dialog(context)
-        dialog.setContentView(R.layout.dismissable_unsearchable_list)
-        dialog.window?.setLayout(650, 800)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-        val searchList: ListView = dialog.findViewById(R.id.searchList)
-        val dismissButton = dialog.findViewById<Button>(R.id.dismissButton)
-        val adapter = OptionsAdapter(context, R.layout.option_layout, data)
-        searchList.adapter = adapter
-        searchList.setOnItemClickListener { adapterView, view, i, l ->
-          val item = adapter.getItem(i)
-          item?.let {
-            val itemIndex = selectedOptions.indexOf(it)
-            if (itemIndex == -1) {
-              selectedOptions.add(it)
-            } else {
-              selectedOptions.removeAt(itemIndex)
-            }
-            poll.MunicipalSupports = selectedOptions.map { it.id }
-            pollViewModel.updatePoll(poll)
-            municipalSupportsInput.setText(selectedOptions.joinToString(", ") { it.name })
-          }
-          val isOtherSelected = selectedOptions.any { it.isOtherOption }
-          if (isOtherSelected) {
-            otherMunicipalSupportsInput.visibility = View.VISIBLE
-          } else {
-            otherMunicipalSupportsInput.visibility = View.GONE
-          }
-        }
-        dismissButton.setOnClickListener {
-          dialog.dismiss()
-        }
+      bindMultipleOptionsWithOtherInput(context, data, pollViewModel, municipalSupportsInput, otherMunicipalSupportsInput) {
+        poll.MunicipalSupports = it.map { it.id }
       }
     }
 
@@ -711,41 +649,8 @@ class PollProvider {
     ) {
       val input = view.findViewById<EditText>(R.id.etHobbies)
       val otherInput = view.findViewById<TextInputLayout>(R.id.loOtherHobbies)
-      val selectedOptions: MutableList<Option> = mutableListOf()
-      input.setOnClickListener {
-        val dialog = Dialog(context)
-        dialog.setContentView(R.layout.dismissable_unsearchable_list)
-        dialog.window?.setLayout(650, 800)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-        val searchList: ListView = dialog.findViewById(R.id.searchList)
-        val dismissButton = dialog.findViewById<Button>(R.id.dismissButton)
-        val adapter = OptionsAdapter(context, R.layout.option_layout, data)
-        searchList.adapter = adapter
-        searchList.setOnItemClickListener { adapterView, view, i, l ->
-          val item = adapter.getItem(i)
-          item?.let {
-            val itemIndex = selectedOptions.indexOf(it)
-            if (itemIndex == -1) {
-              selectedOptions.add(it)
-            } else {
-              selectedOptions.removeAt(itemIndex)
-            }
-            poll.Hobbies = selectedOptions.map { it.id }
-            pollViewModel.updatePoll(poll)
-            input.setText(selectedOptions.joinToString(", ") { it.name })
-          }
-          val isOtherSelected =
-            selectedOptions.any { it.isOtherOption }
-          if (isOtherSelected) {
-            otherInput.visibility = View.VISIBLE
-          } else {
-            otherInput.visibility = View.GONE
-          }
-        }
-        dismissButton.setOnClickListener {
-          dialog.dismiss()
-        }
+      bindMultipleOptionsWithOtherInput(context, data, pollViewModel, input, otherInput) {
+        poll.Hobbies = it.map { it.id }
       }
     }
 
@@ -765,30 +670,15 @@ class PollProvider {
     ) {
       val input = view.findViewById<EditText>(R.id.etReligions)
       val otherInput = view.findViewById<TextInputLayout>(R.id.loOtherReligion)
-      input.setOnClickListener {
-        val dialog = Dialog(context)
-        dialog.setContentView(R.layout.unsearchable_list)
-        dialog.window?.setLayout(650, 800)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-        val searchList: ListView = dialog.findViewById(R.id.searchList)
-        val adapter = OptionsAdapter(context, R.layout.option_layout, data)
-        searchList.adapter = adapter
-        searchList.setOnItemClickListener { adapterView, view, i, l ->
-          val item = adapter.getItem(i)
-          item?.let {
-            input.setText(it.name)
-            poll.Religion = it.id
-            pollViewModel.updatePoll(poll)
-            if (it.isOtherOption) {
-              otherInput.visibility = View.VISIBLE
-            } else {
-              otherInput.visibility = View.GONE
-            }
-          }
-          dialog.dismiss()
-        }
-      }
+      bindSingleOptionWithOtherInput(
+        context,
+        data,
+        pollViewModel,
+        input,
+        otherInput,
+        { poll.Religion = it.id },
+        {  },
+      )
     }
 
     fun bindOtherReligionInput(view: View, pollViewModel: PollViewModel) {
@@ -807,40 +697,8 @@ class PollProvider {
     ) {
       val input = view.findViewById<EditText>(R.id.etSports)
       val otherInput = view.findViewById<TextInputLayout>(R.id.loOtherSport)
-      val selectedOptions: MutableList<Option> = mutableListOf()
-      input.setOnClickListener {
-        val dialog = Dialog(context)
-        dialog.setContentView(R.layout.dismissable_unsearchable_list)
-        dialog.window?.setLayout(650, 800)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-        val searchList: ListView = dialog.findViewById(R.id.searchList)
-        val dismissButton = dialog.findViewById<Button>(R.id.dismissButton)
-        val adapter = OptionsAdapter(context, R.layout.option_layout, data)
-        searchList.adapter = adapter
-        searchList.setOnItemClickListener { adapterView, view, i, l ->
-          val item = adapter.getItem(i)
-          item?.let {
-            val itemIndex = selectedOptions.indexOf(it)
-            if (itemIndex == -1) {
-              selectedOptions.add(it)
-            } else {
-              selectedOptions.removeAt(itemIndex)
-            }
-            poll.Sports = selectedOptions.map { it.id }
-            pollViewModel.updatePoll(poll)
-            input.setText(selectedOptions.joinToString(", ") { it.name })
-          }
-          val isOtherSelected = selectedOptions.any { it.isOtherOption }
-          if (isOtherSelected) {
-            otherInput.visibility = View.VISIBLE
-          } else {
-            otherInput.visibility = View.GONE
-          }
-        }
-        dismissButton.setOnClickListener {
-          dialog.dismiss()
-        }
+      bindMultipleOptionsWithOtherInput(context, data, pollViewModel, input, otherInput) {
+        poll.Sports = it.map { it.id }
       }
     }
 
@@ -859,25 +717,14 @@ class PollProvider {
       pollViewModel: PollViewModel,
     ) {
       val input = view.findViewById<EditText>(R.id.etSoccerTeam)
-      input.setOnClickListener {
-        val dialog = Dialog(context)
-        dialog.setContentView(R.layout.unsearchable_list)
-        dialog.window?.setLayout(650, 800)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-        val searchList: ListView = dialog.findViewById(R.id.searchList)
-        val adapter = OptionsAdapter(context, R.layout.option_layout, data)
-        searchList.adapter = adapter
-        searchList.setOnItemClickListener { adapterView, view, i, l ->
-          val item = adapter.getItem(i)
-          item?.let {
-            input.setText(it.name)
-            poll.SoccerTeam = it.id
-            pollViewModel.updatePoll(poll)
-            dialog.dismiss()
-          }
-        }
-      }
+      bindSingleOptionInput(
+        context,
+        data,
+        pollViewModel,
+        input,
+        { poll.SoccerTeam = it.id },
+        {  },
+      )
     }
 
     fun bindLikesPetsInput(view: View, pollViewModel: PollViewModel) {
@@ -918,40 +765,8 @@ class PollProvider {
     ) {
       val input = view.findViewById<EditText>(R.id.etPetType)
       val otherInput = view.findViewById<TextInputLayout>(R.id.loOtherPetType)
-      val selectedOptions: MutableList<Option> = mutableListOf()
-      input.setOnClickListener {
-        val dialog = Dialog(context)
-        dialog.setContentView(R.layout.dismissable_unsearchable_list)
-        dialog.window?.setLayout(650, 800)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-        val searchList: ListView = dialog.findViewById(R.id.searchList)
-        val dismissButton = dialog.findViewById<Button>(R.id.dismissButton)
-        val adapter = OptionsAdapter(context, R.layout.option_layout, data)
-        searchList.adapter = adapter
-        searchList.setOnItemClickListener { adapterView, view, i, l ->
-          val item = adapter.getItem(i)
-          item?.let {
-            val itemIndex = selectedOptions.indexOf(it)
-            if (itemIndex == -1) {
-              selectedOptions.add(it)
-            } else {
-              selectedOptions.removeAt(itemIndex)
-            }
-            poll.PetTypes = selectedOptions.map { it.id }
-            pollViewModel.updatePoll(poll)
-            input.setText(selectedOptions.joinToString(", ") { it.name })
-          }
-          val isOtherSelected = selectedOptions.any { it.isOtherOption }
-          if (isOtherSelected) {
-            otherInput.visibility = View.VISIBLE
-          } else {
-            otherInput.visibility = View.GONE
-          }
-        }
-        dismissButton.setOnClickListener {
-          dialog.dismiss()
-        }
+      bindMultipleOptionsWithOtherInput(context, data, pollViewModel, input, otherInput) {
+        poll.PetTypes = it.map { it.id }
       }
     }
 
@@ -971,40 +786,8 @@ class PollProvider {
     ) {
       val input = view.findViewById<EditText>(R.id.etGovernmentInvitationActivityOrThemes)
       val otherInput = view.findViewById<TextInputLayout>(R.id.loOtherGovernmentInvitationActivityOrThemes)
-      val selectedOptions: MutableList<Option> = mutableListOf()
-      input.setOnClickListener {
-        val dialog = Dialog(context)
-        dialog.setContentView(R.layout.dismissable_unsearchable_list)
-        dialog.window?.setLayout(650, 800)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-        val searchList: ListView = dialog.findViewById(R.id.searchList)
-        val dismissButton = dialog.findViewById<Button>(R.id.dismissButton)
-        val adapter = OptionsAdapter(context, R.layout.option_layout, data)
-        searchList.adapter = adapter
-        searchList.setOnItemClickListener { adapterView, view, i, l ->
-          val item = adapter.getItem(i)
-          item?.let {
-            val itemIndex = selectedOptions.indexOf(it)
-            if (itemIndex == -1) {
-              selectedOptions.add(it)
-            } else {
-              selectedOptions.removeAt(itemIndex)
-            }
-            poll.GovernmentInvitationActivityOrThemes = selectedOptions.map { it.id }
-            pollViewModel.updatePoll(poll)
-            input.setText(selectedOptions.joinToString(", ") { it.name })
-          }
-          val isOtherSelected = selectedOptions.any { it.isOtherOption }
-          if (isOtherSelected) {
-            otherInput.visibility = View.VISIBLE
-          } else {
-            otherInput.visibility = View.GONE
-          }
-        }
-        dismissButton.setOnClickListener {
-          dialog.dismiss()
-        }
+      bindMultipleOptionsWithOtherInput(context, data, pollViewModel, input, otherInput) {
+        poll.GovernmentInvitationActivityOrThemes = it.map { it.id }
       }
     }
 
@@ -1023,34 +806,8 @@ class PollProvider {
       pollViewModel: PollViewModel,
     ) {
       val input = view.findViewById<EditText>(R.id.etGovernmentTaskActivityOrThemes)
-      val selectedOptions: MutableList<Option> = mutableListOf()
-      input.setOnClickListener {
-        val dialog = Dialog(context)
-        dialog.setContentView(R.layout.dismissable_unsearchable_list)
-        dialog.window?.setLayout(650, 800)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-        val searchList: ListView = dialog.findViewById(R.id.searchList)
-        val dismissButton = dialog.findViewById<Button>(R.id.dismissButton)
-        val adapter = OptionsAdapter(context, R.layout.option_layout, data)
-        searchList.adapter = adapter
-        searchList.setOnItemClickListener { adapterView, view, i, l ->
-          val item = adapter.getItem(i)
-          item?.let {
-            val itemIndex = selectedOptions.indexOf(it)
-            if (itemIndex == -1) {
-              selectedOptions.add(it)
-            } else {
-              selectedOptions.removeAt(itemIndex)
-            }
-            poll.GovernmentTaskActivityOrThemes = selectedOptions.map { it.id }
-            pollViewModel.updatePoll(poll)
-            input.setText(selectedOptions.joinToString(", ") { it.name })
-          }
-        }
-        dismissButton.setOnClickListener {
-          dialog.dismiss()
-        }
+      bindMultipleOptionsInput(context, data, pollViewModel, input) {
+        poll.GovernmentTaskActivityOrThemes = it.map { it.id }
       }
     }
 
@@ -1061,25 +818,14 @@ class PollProvider {
       pollViewModel: PollViewModel,
     ) {
       val input = view.findViewById<EditText>(R.id.etPollutionCause)
-      input.setOnClickListener {
-        val dialog = Dialog(context)
-        dialog.setContentView(R.layout.unsearchable_list)
-        dialog.window?.setLayout(650, 800)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-        val searchList: ListView = dialog.findViewById(R.id.searchList)
-        val adapter = OptionsAdapter(context, R.layout.option_layout, data)
-        searchList.adapter = adapter
-        searchList.setOnItemClickListener { adapterView, view, i, l ->
-          val item = adapter.getItem(i)
-          item?.let {
-            input.setText(it.name)
-            poll.PollutionCause = it.id
-            pollViewModel.updatePoll(poll)
-            dialog.dismiss()
-          }
-        }
-      }
+      bindSingleOptionInput(
+        context,
+        data,
+        pollViewModel,
+        input,
+        { poll.PollutionCause = it.id },
+        {  },
+      )
     }
 
     fun bindPrincipalSectorProblematicInput(view: View, pollViewModel: PollViewModel) {

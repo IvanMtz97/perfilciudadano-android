@@ -4,7 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../Library/Android/sdk/platforms/android-32/data/res/layout/simple_dropdown_item_1line.xml" value="0.1308876811594203" />
+        <entry key="app/src/main/res/drawable/back_arrow.xml" value="0.41510416666666666" />
+        <entry key="app/src/main/res/drawable/custom_selector_dialog.xml" value="0.42239583333333336" />
+        <entry key="app/src/main/res/drawable/ic_arrow_down.xml" value="0.42239583333333336" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.21822916666666667" />
+        <entry key="app/src/main/res/drawable/list_divider.xml" value="0.42239583333333336" />
+        <entry key="app/src/main/res/drawable/option_dot_normal.xml" value="0.42239583333333336" />
+        <entry key="app/src/main/res/drawable/option_normal.xml" value="0.42239583333333336" />
+        <entry key="app/src/main/res/drawable/option_selected.xml" value="0.42239583333333336" />
         <entry key="app/src/main/res/drawable/radio_normal.xml" value="0.4171875" />
         <entry key="app/src/main/res/drawable/radio_selected.xml" value="0.4171875" />
         <entry key="app/src/main/res/drawable/radio_selector.xml" value="0.4171875" />
@@ -17,13 +24,14 @@
         <entry key="app/src/main/res/layout/content_new_poll.xml" value="0.17477203647416414" />
         <entry key="app/src/main/res/layout/dismissable_unsearchable_list.xml" value="0.25253292806484295" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.15670289855072464" />
-        <entry key="app/src/main/res/layout/fragment_new_poll_form.xml" value="0.26508531002913027" />
+        <entry key="app/src/main/res/layout/fragment_new_poll_form.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_option_with_other.xml" value="0.21467391304347827" />
         <entry key="app/src/main/res/layout/fragment_text_input.xml" value="0.2826086956521739" />
         <entry key="app/src/main/res/layout/option_layout.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/searchable_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/option_selected_layout.xml" value="0.3908514492753623" />
+        <entry key="app/src/main/res/layout/searchable_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/signin.xml" value="0.34479166666666666" />
-        <entry key="app/src/main/res/layout/unsearchable_list.xml" value="0.3375" />
+        <entry key="app/src/main/res/layout/unsearchable_list.xml" value="0.33" />
       </map>
     </option>
   </component>

@@ -11,18 +11,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="Proceso de participacion ciudadana" />
-
-    <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="Nuevo registro"
-      android:textSize="16sp"
-      android:textStyle="bold" />
-
     <androidx.fragment.app.FragmentContainerView
       android:id="@+id/fragmentContainerView"
       android:name="com.example.perfilciudadano.fragments.NewPollFormFragment"

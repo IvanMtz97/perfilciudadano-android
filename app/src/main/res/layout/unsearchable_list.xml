@@ -4,18 +4,23 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical"
-  android:padding="16dp"
-  android:background="@android:color/white">
-
+  android:paddingTop="30dp"
+  android:paddingBottom="30dp"
+  android:paddingLeft="15dp"
+  android:paddingRight="15dp"
+  android:background="@drawable/custom_selector_dialog">
   <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Seleccione una opcion"
-    android:textSize="20sp"
+    android:layout_marginBottom="10dp"
+    android:textColor="@color/purple_500"
+    android:textSize="15sp"
     android:textStyle="bold" />
+
   <ListView
+    android:id="@+id/searchList"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/searchList" />
-
+    android:divider="@drawable/list_divider" />
 </LinearLayout>

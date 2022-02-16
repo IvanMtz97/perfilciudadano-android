@@ -11,14 +11,15 @@ import android.widget.TextView
 import com.example.perfilciudadano.R
 import com.example.perfilciudadano.models.Option
 
-class OptionsAdapter(context: Context, selectedOption: Int, options: List<Option>) : ArrayAdapter<Option>(context, 0, options) {
+class MultipleOptionsAdapter(context: Context, selectedOptions: List<Int>, options: List<Option>) : ArrayAdapter<Option>(context, 0, options) {
   private var allOptions: List<Option> = options
-  private val selectedOption = selectedOption
+  private var selectedOptions = selectedOptions
 
   override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
     val layoutInflater = LayoutInflater.from(context)
     var view = layoutInflater.inflate(R.layout.option_normal_layout, null)
-    if (selectedOption == allOptions[position].id) {
+
+    if (selectedOptions.contains(allOptions[position].id)) {
       view = layoutInflater.inflate(R.layout.option_selected_layout, null)
     }
     val label = view.findViewById<TextView>(R.id.optionLabel)
