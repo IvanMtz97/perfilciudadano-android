@@ -1,8 +1,10 @@
 package com.example.perfilciudadano.views
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -18,15 +20,14 @@ class SignInActivity : AppCompatActivity() {
   private lateinit var codeSecondDigitInput: EditText
   private lateinit var codeThirdDigitInput: EditText
   private lateinit var codeFourthDigitInput: EditText
-  private lateinit var codeFifthDigitInput: EditText
   private lateinit var signInButton: Button
 
   private fun getFolium(): String {
-    return "${codeFirstDigitInput.text}${codeSecondDigitInput.text}${codeThirdDigitInput.text}${codeFourthDigitInput.text}${codeFifthDigitInput.text}"
+    return "${codeFirstDigitInput.text}${codeSecondDigitInput.text}${codeThirdDigitInput.text}${codeFourthDigitInput.text}"
   }
 
   private fun isFoliumValid(): Boolean {
-    return codeFirstDigitInput.text.isNotEmpty() && codeSecondDigitInput.text.isNotEmpty() && codeThirdDigitInput.text.isNotEmpty() && codeFourthDigitInput.text.isNotEmpty() && codeFifthDigitInput.text.isNotEmpty()
+    return codeFirstDigitInput.text.isNotEmpty() && codeSecondDigitInput.text.isNotEmpty() && codeThirdDigitInput.text.isNotEmpty() && codeFourthDigitInput.text.isNotEmpty()
   }
 
   private fun onSignInInputChange(inputToValidate: EditText, inputToFocus: EditText) {
@@ -45,16 +46,18 @@ class SignInActivity : AppCompatActivity() {
         val signInResponse = AuthService().signIn(folium)
 
         if (signInResponse != null && signInResponse.success) {
-          if (signInResponse.role == Roles.OPERATOR) {
-            val operatorIntent = Intent(applicationContext, OperatorHomeActivity::class.java)
-            finish()
-            startActivity(operatorIntent)
-          } else if (signInResponse.role == Roles.LEADER) {
-            val leaderIntent = Intent(applicationContext, LeaderHomeActivity::class.java)
-            leaderIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            finish()
-            startActivity(leaderIntent)
-          }
+          val sharedPreferences = getSharedPreferences("perfilciudadano", Context.MODE_PRIVATE)
+          val sharedPreferencesEditor = sharedPreferences.edit()
+          signInResponse.id?.let { sharedPreferencesEditor.putInt("foliumId", it) }
+          signInResponse.folium?.let { sharedPreferencesEditor.putString("foliumValue", it) }
+          signInResponse.type?.let { sharedPreferencesEditor.putString("foliumType", it) }
+          signInResponse.name?.let { sharedPreferencesEditor.putString("foliumName", it) }
+          signInResponse.surname?.let { sharedPreferencesEditor.putString("foliumSurname", it) }
+          sharedPreferencesEditor.apply()
+          sharedPreferencesEditor.commit()
+          val intent = Intent(applicationContext, HomeActivity::class.java)
+          finish()
+          startActivity(intent)
         } else {
           Toast.makeText(applicationContext, "El folio no es correcto", Toast.LENGTH_LONG).show()
         }
@@ -66,11 +69,13 @@ class SignInActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_sign_in)
     this.supportActionBar?.hide()
+    val sharedPreferences = getSharedPreferences("perfilciudadano", Context.MODE_PRIVATE)
+    val sharedPreferencesEditor = sharedPreferences.edit()
+    sharedPreferencesEditor.clear()
     codeFirstDigitInput = findViewById(R.id.codeFirstDigitInput)
     codeSecondDigitInput = findViewById(R.id.codeSecondDigitInput)
     codeThirdDigitInput = findViewById(R.id.codeThirdDigitInput)
     codeFourthDigitInput = findViewById(R.id.codeFourthDigitInput)
-    codeFifthDigitInput = findViewById(R.id.codeFifthDigitInput)
     signInButton = findViewById(R.id.signInButton)
     signInButton.isEnabled = false
 
@@ -84,9 +89,6 @@ class SignInActivity : AppCompatActivity() {
       onSignInInputChange(codeThirdDigitInput, codeFourthDigitInput)
     }
     codeFourthDigitInput.doOnTextChanged { text, start, before, count ->
-      onSignInInputChange(codeFourthDigitInput, codeFifthDigitInput)
-    }
-    codeFifthDigitInput.doOnTextChanged { text, start, before, count ->
       signInButton.isEnabled = isFoliumValid()
     }
     signInButton.setOnClickListener {

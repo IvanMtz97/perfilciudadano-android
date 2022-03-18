@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:gravity="center"
+  android:orientation="vertical"
+  tools:context=".views.PollSentActivity">
+
+  <ImageView
+    android:id="@+id/imageView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:srcCompat="@drawable/success_poll" />
+
+  <TextView
+    android:id="@+id/textView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Registro Exitoso!"
+    android:layout_marginTop="15dp"
+    android:textAlignment="center"
+    android:textColor="@color/purple_500"
+    android:textSize="28sp"
+    android:textStyle="bold" />
+
+  <TextView
+    android:id="@+id/txtFoliumLabel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Este es tu Numero de Folio"
+    android:layout_marginTop="5dp"
+    android:textAlignment="center"
+    android:textColor="@color/purple_500"
+    android:textSize="14sp"
+    android:textStyle="bold" />
+
+  <TextView
+    android:id="@+id/txtFolium"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="0000"
+    android:layout_marginTop="5dp"
+    android:textAlignment="center"
+    android:textColor="@color/purple_500"
+    android:textSize="32sp"
+    android:letterSpacing="0.6"
+    android:textStyle="bold" />
+
+  <TextView
+    android:id="@+id/textView3"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Texto de relleno texto de relleno"
+    android:layout_marginTop="5dp"
+    android:textAlignment="center"
+    android:textColor="@color/purple_500"
+    android:textSize="14sp"
+    android:textStyle="bold" />
+
+  <Button
+    android:id="@+id/btnFinish"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp"
+    android:textAllCaps="false"
+    android:text="VOLVER AL INICIO" />
+</LinearLayout>

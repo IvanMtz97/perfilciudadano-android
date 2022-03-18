@@ -14,4 +14,9 @@
         <item name="android:textColorHint">@color/purple_500</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="SplashTheme" parent="Theme.Perfilciudadano">
+        <item name="android:background">@drawable/encuesta_ciudadana</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 </resources>

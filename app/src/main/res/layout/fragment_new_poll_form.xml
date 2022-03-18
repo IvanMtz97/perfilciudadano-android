@@ -20,11 +20,14 @@
       android:orientation="vertical">
 
       <Button
+        android:id="@+id/btnBack"
         android:layout_width="55dp"
         android:layout_height="55dp"
+        android:layout_marginTop="25dp"
+        android:elevation="12dp"
         android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/ic_baseline_arrow_back_24"
         android:textColor="@color/purple_500"
-        app:icon="@drawable/ic_baseline_arrow_back_24"
         app:strokeColor="#3F51B5" />
 
       <TextView
@@ -33,6 +36,7 @@
         android:textColor="@color/purple_500"
         android:textStyle="bold"
         android:textSize="35sp"
+        android:layout_marginTop="25dp"
         android:text="Nuevo Registro" />
 
       <TextView
@@ -42,7 +46,7 @@
         android:textStyle="bold"
         android:textSize="21sp"
         android:layout_marginTop="2dp"
-        android:text="Proceso de participacion Ciudadana" />
+        android:text="Proceso de participación Ciudadana" />
 
       <TextView
         android:layout_width="wrap_content"
@@ -73,7 +77,8 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:ems="10"
-          android:hint="Clave de elector"
+          android:hint="Clave de elector*"
+          android:maxLength="18"
           android:inputType="textCapCharacters" />
       </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,6 +97,7 @@
           android:layout_height="wrap_content"
           android:ems="10"
           android:hint="CURP*"
+          android:maxLength="18"
           android:inputType="textCapCharacters" />
       </com.google.android.material.textfield.TextInputLayout>
 
@@ -165,6 +171,7 @@
           android:ems="10"
           android:hint="Fecha de nacimiento* DD/MM/AAAA"
           android:inputType="datetime"
+          android:maxLength="1042"
           android:textColorHint="@color/purple_500" />
       </com.google.android.material.textfield.TextInputLayout>
 
@@ -201,6 +208,7 @@
           android:layout_height="wrap_content"
           android:ems="10"
           android:hint="Vigencia del INE* AAAA"
+          android:maxLength="4"
           android:inputType="number" />
       </com.google.android.material.textfield.TextInputLayout>
 
@@ -257,29 +265,8 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:ems="10"
-          android:hint="Codigo Postal*"
+          android:hint="Código Postal*"
           android:inputType="number" />
-      </com.google.android.material.textfield.TextInputLayout>
-
-      <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/loSection"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:textColorHint="@color/purple_500"
-        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
-
-        <com.google.android.material.textfield.TextInputEditText
-          android:id="@+id/etSection"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:drawableEnd="@drawable/ic_arrow_down"
-          android:focusable="false"
-          android:gravity="center_vertical"
-          android:hint="Seccion*"
-          android:inputType="none"
-          android:padding="12dp" />
       </com.google.android.material.textfield.TextInputLayout>
 
       <com.google.android.material.textfield.TextInputLayout
@@ -299,6 +286,27 @@
           android:focusable="false"
           android:gravity="center_vertical"
           android:hint="Colonia*"
+          android:inputType="none"
+          android:padding="12dp" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loSection"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etSection"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:drawableEnd="@drawable/ic_arrow_down"
+          android:focusable="false"
+          android:gravity="center_vertical"
+          android:hint="Sección*"
           android:inputType="none"
           android:padding="12dp" />
       </com.google.android.material.textfield.TextInputLayout>
@@ -335,7 +343,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:ems="10"
-          android:hint="Numero exterior*"
+          android:hint="Número exterior*"
           android:inputType="textCapCharacters" />
       </com.google.android.material.textfield.TextInputLayout>
 
@@ -351,7 +359,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:ems="10"
-          android:hint="Numero interior"
+          android:hint="Número interior"
           android:inputType="textCapCharacters" />
       </com.google.android.material.textfield.TextInputLayout>
 
@@ -394,14 +402,24 @@
           android:textColor="@drawable/text_color" />
       </RadioGroup>
 
-      <EditText
-        android:id="@+id/etIneLivingAddress"
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loIneLivingAddress"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Direccion de vivienda actual*"
-        android:inputType="textCapCharacters"
-        android:visibility="gone" />
+        android:layout_marginBottom="10dp"
+        android:textColorHint="@color/purple_500"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
+        android:visibility="gone" >
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/etIneLivingAddress"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="Direccion de vivienda actual*"
+          android:inputType="textCapCharacters" />
+      </com.google.android.material.textfield.TextInputLayout>
 
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/loMaritalStatus"
@@ -411,7 +429,6 @@
         android:layout_marginBottom="10dp"
         android:textColorHint="@color/purple_500"
         app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color">
-
         <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/etMaritalStatus"
           android:layout_width="match_parent"

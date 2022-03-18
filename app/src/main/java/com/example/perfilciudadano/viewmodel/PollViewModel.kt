@@ -1,10 +1,17 @@
 package com.example.perfilciudadano.viewmodel
 
+import android.content.Intent
 import android.util.Log
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.perfilciudadano.models.Poll
+import com.example.perfilciudadano.models.SendPollresponse
+import com.example.perfilciudadano.network.PollService
+import com.example.perfilciudadano.views.PollSentActivity
+import kotlinx.coroutines.launch
 
 class PollViewModel : ViewModel() {
   private val mutablePoll = MutableLiveData<Poll>()
@@ -24,6 +31,7 @@ class PollViewModel : ViewModel() {
     "MaritalStatus",
     "FamilyPosition",
     "CellPhoneNumber",
+    "PhoneNumber",
     "FamilyIntegrantsNumber",
   ))
   val poll: LiveData<Poll> get() = mutablePoll
@@ -49,7 +57,22 @@ class PollViewModel : ViewModel() {
     mutablePollErrors.value = list ?: mutableListOf()
   }
 
-  fun sendPoll(poll: Poll) {
-    Log.v("SEND POLL", poll.toString())
+  fun sendPoll(poll: Poll, activity: FragmentActivity?) {
+    val pollService = PollService()
+    viewModelScope.launch {
+      Log.v("SEND POLL", poll.toString())
+      val response: SendPollresponse? = pollService.sendPoll(poll)
+      Log.v("SEND POLL RESPONSE", response.toString())
+      response.let {
+        if (response != null && activity != null) {
+          if (response.success) {
+            val intent = Intent(activity, PollSentActivity::class.java)
+            intent.putExtra("generatedFolium", response.folium)
+            activity.finish()
+            activity.startActivity(intent)
+          }
+        }
+      }
+    }
   }
 }

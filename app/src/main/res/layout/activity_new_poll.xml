@@ -12,7 +12,7 @@
     android:orientation="vertical">
 
     <androidx.fragment.app.FragmentContainerView
-      android:id="@+id/fragmentContainerView"
+      android:id="@+id/newPollFragmentContainer"
       android:name="com.example.perfilciudadano.fragments.NewPollFormFragment"
       android:layout_width="match_parent"
       android:layout_height="wrap_content" />

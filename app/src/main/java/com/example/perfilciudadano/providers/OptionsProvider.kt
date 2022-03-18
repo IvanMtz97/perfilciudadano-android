@@ -6,5 +6,6 @@ class OptionsProvider {
   companion object {
     var options: List<Option> = emptyList()
     var colonies: List<Option> = emptyList()
+    var sections: List<Option> = emptyList()
   }
 }

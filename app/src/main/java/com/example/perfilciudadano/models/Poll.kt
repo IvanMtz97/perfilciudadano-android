@@ -56,4 +56,6 @@ data class Poll(
   var PrincipalSectorProblematic: String = "",
   var FutureFiveYears: String = "",
   var Comments: String = "",
+  var CreatedByFolium: Number = -1,
+  var LeaderFolium: Number = -1,
 )

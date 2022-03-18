@@ -1,9 +1,13 @@
 package com.example.perfilciudadano.services
 
 import android.util.Log
+import com.example.perfilciudadano.R
 import com.example.perfilciudadano.models.Poll
+import com.example.perfilciudadano.network.PollService
 import com.example.perfilciudadano.viewmodel.PollViewModel
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class validations {
   companion object {
@@ -16,7 +20,7 @@ class validations {
     fun validateSelectionInput(fieldValue: Number, layout: TextInputLayout, pollViewModel: PollViewModel, fieldId: String) {
       layout.error = null
       if (fieldValue == PRISTINE_VALUE) {
-        layout.error = "Selecciona una opcion"
+        layout.error = "Selecciona una opción"
       }
 
       if (layout.error.isNullOrEmpty()) {
@@ -53,6 +57,15 @@ class validations {
       layout.error = null
       if (text != PENDING && text.length != CURP_LENGTH) {
         layout.error = "Ingresa un CURP valido de ${CURP_LENGTH} caracteres"
+      } else {
+        runBlocking {
+          launch {
+            val response = PollService().getCurps(text)
+            if (response?.count != 0) {
+              layout.error = "Este CURP ya esta en uso"
+            }
+          }
+        }
       }
 
       if (layout.error.isNullOrEmpty()) {
@@ -92,6 +105,22 @@ class validations {
       layout.error = null
       if (text.length < 2) {
         layout.error = "Ingresa un apellido materno valido"
+      }
+
+      if (layout.error.isNullOrEmpty()) {
+        pollViewModel.removePollError(fieldId)
+      } else {
+        pollViewModel.addPollError(fieldId)
+      }
+    }
+
+    fun validateBirthDate(text: String, layout: TextInputLayout, pollViewModel: PollViewModel, fieldId: String) {
+      val dateRegex = Regex("^\\d{2}/\\d{2}/\\d{4}\$")
+      layout.error = null
+      if (text.isNullOrBlank() && text.length != 4) {
+        layout.error = "Ingresa una fecha de nacimiento valida"
+      } else if (!text.matches(dateRegex)) {
+        layout.error = "Ingresa una fecha de nacimiento valida"
       }
 
       if (layout.error.isNullOrEmpty()) {
@@ -166,6 +195,19 @@ class validations {
       }
     }
 
+    fun validateIneLivingAddressInput(text: String, layout: TextInputLayout, pollViewModel: PollViewModel, fieldId: String) {
+      layout.error = null
+      if (text.isNullOrEmpty()) {
+        layout.error = "Ingresa una direccion valida"
+      }
+
+      if (layout.error.isNullOrEmpty()) {
+        pollViewModel.removePollError(fieldId)
+      } else {
+        pollViewModel.addPollError(fieldId)
+      }
+    }
+
     fun validateCellPhoneNumberInput(text: String, layout: TextInputLayout, pollViewModel: PollViewModel, fieldId: String) {
       layout.error = null
       if (text.length != PHONE_LENGTH) {
@@ -196,6 +238,19 @@ class validations {
       layout.error = null
       if (text.isNullOrEmpty()) {
         layout.error = "Ingresa un numero de integrantes valido"
+      }
+
+      if (layout.error.isNullOrEmpty()) {
+        pollViewModel.removePollError(fieldId)
+      } else {
+        pollViewModel.addPollError(fieldId)
+      }
+    }
+
+    fun validateOtherOptionInput(text: String, layout: TextInputLayout, pollViewModel: PollViewModel, fieldId: String) {
+      layout.error = null
+      if (text.isNullOrEmpty()) {
+        layout.error = "Ingresa un valor valido"
       }
 
       if (layout.error.isNullOrEmpty()) {

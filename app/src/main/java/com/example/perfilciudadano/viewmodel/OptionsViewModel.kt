@@ -11,8 +11,10 @@ import kotlinx.coroutines.launch
 class OptionsViewModel : ViewModel() {
   private val mutableOptions = MutableLiveData<MutableList<Option>>()
   private val mutableColonies = MutableLiveData<List<Option>>()
+  private val mutableSections = MutableLiveData<List<Option>>()
   val options: LiveData<MutableList<Option>> get() = mutableOptions
   val colonies: LiveData<List<Option>> get() = mutableColonies
+  val sections: LiveData<List<Option>> get() = mutableSections
 
   fun getAllOptions() {
     viewModelScope.launch {
@@ -25,6 +27,13 @@ class OptionsViewModel : ViewModel() {
     viewModelScope.launch {
       val colonies = OptionsService().getColoniesByZipCode(zipCode)
       mutableColonies.postValue(colonies)
+    }
+  }
+
+  fun getSectionsByColony(colony: String) {
+    viewModelScope.launch {
+      val sections = OptionsService().getSectionsByColony(colony)
+      mutableSections.postValue(sections)
     }
   }
 

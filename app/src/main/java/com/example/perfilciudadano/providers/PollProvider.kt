@@ -1,5 +1,6 @@
 package com.example.perfilciudadano.providers
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
@@ -11,6 +12,7 @@ import android.widget.EditText
 import android.widget.ListView
 import android.widget.RadioButton
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.FragmentActivity
 import com.example.perfilciudadano.R
 import com.example.perfilciudadano.adapters.MultipleOptionsAdapter
 import com.example.perfilciudadano.adapters.OptionsAdapter
@@ -69,6 +71,7 @@ class PollProvider {
 
     fun bindSingleOptionWithOtherInput(
       context: Context,
+      fieldName: String,
       data: List<Option>,
       pollViewModel: PollViewModel,
       input: EditText,
@@ -97,8 +100,10 @@ class PollProvider {
             pollViewModel.updatePoll(poll)
             if (item.name == OtherOption) {
               otherInput.visibility = View.VISIBLE
+              pollViewModel.addPollError("Other$fieldName")
             } else {
               otherInput.visibility = View.GONE
+              pollViewModel.removePollError("Other$fieldName")
             }
             onValidate()
             selectedOption = item
@@ -152,6 +157,7 @@ class PollProvider {
 
     fun bindMultipleOptionsWithOtherInput(
       context: Context,
+      fieldName: String,
       data: List<Option>,
       pollViewModel: PollViewModel,
       input: EditText,
@@ -188,8 +194,10 @@ class PollProvider {
             val isOtherSelected = selectedOptions.any { it.isOtherOption }
             if (isOtherSelected) {
               otherInput.visibility = View.VISIBLE
+              pollViewModel.addPollError("Other$fieldName")
             } else {
               otherInput.visibility = View.GONE
+              pollViewModel.removePollError("Other$fieldName")
             }
           }
         }
@@ -200,8 +208,8 @@ class PollProvider {
     }
 
     fun bindElectorKeyInput(view: View, pollViewModel: PollViewModel) {
-      val electorKeyInput = view.findViewById<TextInputEditText>(R.id.etElectorKey)
-      electorKeyInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<TextInputEditText>(R.id.etElectorKey)
+      input.doOnTextChanged { text, start, before, count ->
         poll.ElectorKey = text.toString()
         pollViewModel.updatePoll(poll)
         validations.validateElectorKeyInput(text.toString(), view.findViewById(R.id.loElectorKey), pollViewModel, "ElectorKey")
@@ -209,8 +217,8 @@ class PollProvider {
     }
 
     fun bindCurpInput(view: View, pollViewModel: PollViewModel) {
-      val curpInput = view.findViewById<EditText>(R.id.etCurp)
-      curpInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<EditText>(R.id.etCurp)
+      input.doOnTextChanged { text, start, before, count ->
         poll.Curp = text.toString()
         pollViewModel.updatePoll(poll)
         validations.validateCurpInput(text.toString(), view.findViewById(R.id.loCurp), pollViewModel, "Curp")
@@ -218,8 +226,8 @@ class PollProvider {
     }
 
     fun bindNameInput(view: View, pollViewModel: PollViewModel) {
-      val nameInput = view.findViewById<EditText>(R.id.etName)
-      nameInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<EditText>(R.id.etName)
+      input.doOnTextChanged { text, start, before, count ->
         poll.Name = text.toString()
         pollViewModel.updatePoll(poll)
         validations.validateName(text.toString(), view.findViewById(R.id.loName), pollViewModel, "Name")
@@ -227,8 +235,8 @@ class PollProvider {
     }
 
     fun bindSurNameInput(view: View, pollViewModel: PollViewModel) {
-      val surNameInput = view.findViewById<EditText>(R.id.etSurname)
-      surNameInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<EditText>(R.id.etSurname)
+      input.doOnTextChanged { text, start, before, count ->
         poll.SurName = text.toString()
         pollViewModel.updatePoll(poll)
         validations.validateSurName(text.toString(), view.findViewById(R.id.loSurName), pollViewModel, "SurName")
@@ -236,8 +244,8 @@ class PollProvider {
     }
 
     fun bindSecondSurNameInput(view: View, pollViewModel: PollViewModel) {
-      val secondSurNameInput = view.findViewById<EditText>(R.id.etSecondSurname)
-      secondSurNameInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<EditText>(R.id.etSecondSurname)
+      input.doOnTextChanged { text, start, before, count ->
         poll.SecondSurName = text.toString()
         pollViewModel.updatePoll(poll)
         validations.validateSecondSurName(text.toString(), view.findViewById(R.id.loSecondSurName), pollViewModel, "SecondSurName")
@@ -245,16 +253,17 @@ class PollProvider {
     }
 
     fun bindBirthDateInput(view: View, pollViewModel: PollViewModel) {
-      val birthDateInput = view.findViewById<EditText>(R.id.etBirthDate)
-      birthDateInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<EditText>(R.id.etBirthDate)
+      input.doOnTextChanged { text, start, before, count ->
         poll.BirthDate = text.toString()
         pollViewModel.updatePoll(poll)
+        validations.validateBirthDate(text.toString(), view.findViewById(R.id.loBirthDate), pollViewModel, "BirthDate")
       }
     }
 
     fun bindBirthPlaceInput(view: View, pollViewModel: PollViewModel) {
-      val birthPlaceInput = view.findViewById<EditText>(R.id.etBirthPlace)
-      birthPlaceInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<EditText>(R.id.etBirthPlace)
+      input.doOnTextChanged { text, start, before, count ->
         poll.BirthPlace = text.toString()
         pollViewModel.updatePoll(poll)
         validations.validateBirthPlace(text.toString(), view.findViewById(R.id.loBirthPlace), pollViewModel, "BirthPlace")
@@ -262,8 +271,8 @@ class PollProvider {
     }
 
     fun bindIneExpirationYearInput(view: View, pollViewModel: PollViewModel) {
-      val ineExpirationYearInput = view.findViewById<EditText>(R.id.etIneExp)
-      ineExpirationYearInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<EditText>(R.id.etIneExp)
+      input.doOnTextChanged { text, start, before, count ->
         if (!text.toString().isNullOrEmpty()) {
           poll.IneExpirationYear = text.toString().toInt()
         } else {
@@ -301,9 +310,36 @@ class PollProvider {
           optionsViewModel.clearColonies()
           colonyInput.setText("")
           poll.Colony = -1
+          poll.Section = -1
+          view.findViewById<EditText>(R.id.etColony).setText("")
+          view.findViewById<EditText>(R.id.etSection).setText("")
         }
         pollViewModel.updatePoll(poll)
       }
+    }
+
+    fun bindColonyInput(
+      context: Context,
+      view: View,
+      data: List<Option>,
+      pollViewModel: PollViewModel,
+      optionsViewModel: OptionsViewModel,
+    ) {
+      val input = view.findViewById<EditText>(R.id.etColony)
+      val layout = view.findViewById<TextInputLayout>(R.id.loColony)
+      bindSingleOptionInput(
+        context,
+        data,
+        pollViewModel,
+        input,
+        {
+          poll.Colony = it.id
+          poll.Section = -1
+          view.findViewById<EditText>(R.id.etSection).setText("")
+          optionsViewModel.getSectionsByColony(it.name)
+        },
+        { validations.validateSelectionInput(poll.Colony, layout, pollViewModel, "Colony") },
+      )
     }
 
     fun bindSectionInput(
@@ -324,27 +360,9 @@ class PollProvider {
       )
     }
 
-    fun bindColonyInput(
-      context: Context,
-      view: View,
-      data: List<Option>,
-      pollViewModel: PollViewModel,
-    ) {
-      val input = view.findViewById<EditText>(R.id.etColony)
-      val layout = view.findViewById<TextInputLayout>(R.id.loColony)
-      bindSingleOptionInput(
-        context,
-        data,
-        pollViewModel,
-        input,
-        { poll.Colony = it.id },
-        { validations.validateSelectionInput(poll.Colony, layout, pollViewModel, "Colony") },
-      )
-    }
-
     fun bindStreetInput(view: View, pollViewModel: PollViewModel) {
-      val streetInput = view.findViewById<EditText>(R.id.etStreet)
-      streetInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<EditText>(R.id.etStreet)
+      input.doOnTextChanged { text, start, before, count ->
         poll.Street = text.toString()
         pollViewModel.updatePoll(poll)
         validations.validateStreet(text.toString(), view.findViewById(R.id.loStreet), pollViewModel, "Street")
@@ -352,8 +370,8 @@ class PollProvider {
     }
 
     fun bindExteriorNumberInput(view: View, pollViewModel: PollViewModel) {
-      val exteriorNumberInput = view.findViewById<EditText>(R.id.etExtNum)
-      exteriorNumberInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<EditText>(R.id.etExtNum)
+      input.doOnTextChanged { text, start, before, count ->
         poll.ExteriorNumber = text.toString()
         pollViewModel.updatePoll(poll)
         validations.validateExteriorNumberInput(text.toString(), view.findViewById(R.id.loExtNum), pollViewModel, "ExteriorNumber")
@@ -361,29 +379,41 @@ class PollProvider {
     }
 
     fun bindInteriorNumberInput(view: View, pollViewModel: PollViewModel) {
-      val interiorNumberInput = view.findViewById<EditText>(R.id.etIntNum)
-      interiorNumberInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<EditText>(R.id.etIntNum)
+      input.doOnTextChanged { text, start, before, count ->
         poll.InteriorNumber = text.toString()
         pollViewModel.updatePoll(poll)
       }
     }
 
-    fun bindIneLivingAddressInput(view: View, pollViewModel: PollViewModel) {
+    fun bindIneMatchesLivingAddressInput(view: View, pollViewModel: PollViewModel) {
       val yesRadio: RadioButton = view.findViewById(R.id.rIneMatchesLivingAddress)
       val noRadio: RadioButton = view.findViewById(R.id.rIneDoesntMatchesLivingAddress)
-      val ineLivingAddressInput: EditText = view.findViewById(R.id.etIneLivingAddress)
+      val layout: TextInputLayout = view.findViewById(R.id.loIneLivingAddress)
+      val editText: TextInputEditText = view.findViewById(R.id.etIneLivingAddress)
       yesRadio.isChecked = true
 
       yesRadio.setOnClickListener {
-        ineLivingAddressInput.visibility = View.GONE
-        ineLivingAddressInput.setText("")
+        layout.visibility = View.GONE
+        editText.setText("")
         poll.IneMatchesLivingAddress = true
         pollViewModel.updatePoll(poll)
+        pollViewModel.removePollError("IneLivingAddress")
       }
       noRadio.setOnClickListener {
-        ineLivingAddressInput.visibility = View.VISIBLE
+        layout.visibility = View.VISIBLE
         poll.IneMatchesLivingAddress = false
         pollViewModel.updatePoll(poll)
+        pollViewModel.addPollError("IneLivingAddress")
+      }
+    }
+
+    fun bindIneLivingAddressInput(view: View, pollViewModel: PollViewModel) {
+      val input = view.findViewById<EditText>(R.id.etIneLivingAddress)
+      input.doOnTextChanged { text, start, before, count ->
+        poll.IneLivingAddress = text.toString()
+        pollViewModel.updatePoll(poll)
+        validations.validateIneLivingAddressInput(text.toString(), view.findViewById(R.id.loIneLivingAddress), pollViewModel, "IneLivingAddress")
       }
     }
 
@@ -416,6 +446,7 @@ class PollProvider {
       val otherInput = view.findViewById<TextInputLayout>(R.id.loOtherFamilyPosition)
       bindSingleOptionWithOtherInput(
         context,
+        "FamilyPosition",
         data,
         pollViewModel,
         input,
@@ -426,16 +457,22 @@ class PollProvider {
     }
 
     fun bindOtherFamilyPositionInput(view: View, pollViewModel: PollViewModel) {
-      val otherFamilyPositionInput = view.findViewById<EditText>(R.id.etOtherFamilyPosition)
-      otherFamilyPositionInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<EditText>(R.id.etOtherFamilyPosition)
+      input.doOnTextChanged { text, start, before, count ->
         poll.OtherFamilyPosition = text.toString()
         pollViewModel.updatePoll(poll)
+        validations.validateOtherOptionInput(
+          text.toString(),
+          view.findViewById(R.id.loOtherFamilyPosition),
+          pollViewModel,
+          "OtherFamilyPosition"
+        )
       }
     }
 
     fun bindCellPhoneNumberInput(view: View, pollViewModel: PollViewModel) {
-      val cellPhoneNumberInput = view.findViewById<EditText>(R.id.etCellPhoneNumber)
-      cellPhoneNumberInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<EditText>(R.id.etCellPhoneNumber)
+      input.doOnTextChanged { text, start, before, count ->
         if (text.toString().isNullOrEmpty()) {
           poll.CellPhoneNumber = -1
         } else {
@@ -447,8 +484,8 @@ class PollProvider {
     }
 
     fun bindPhoneNumberInput(view: View, pollViewModel: PollViewModel) {
-      val phoneNumberInput = view.findViewById<EditText>(R.id.etPhoneNumber)
-      phoneNumberInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<EditText>(R.id.etPhoneNumber)
+      input.doOnTextChanged { text, start, before, count ->
         if (text.toString().isNullOrEmpty()) {
          poll.CellPhoneNumber = -1
         } else {
@@ -460,8 +497,8 @@ class PollProvider {
     }
 
     fun bindFamilyIntegrantsNumberInput(view: View, pollViewModel: PollViewModel) {
-      val phoneNumberInput = view.findViewById<EditText>(R.id.etFamilyIntegrantsNumber)
-      phoneNumberInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<EditText>(R.id.etFamilyIntegrantsNumber)
+      input.doOnTextChanged { text, start, before, count ->
         if (text.toString().isNullOrEmpty()) {
           poll.FamilyIntegrantsNumber = -1
         } else {
@@ -513,6 +550,7 @@ class PollProvider {
       val otherInput = view.findViewById<TextInputLayout>(R.id.loOtherOccupation)
       bindSingleOptionWithOtherInput(
         context,
+        "Occupation",
         data,
         pollViewModel,
         input,
@@ -523,10 +561,16 @@ class PollProvider {
     }
 
     fun bindOtherOccupationInput(view: View, pollViewModel: PollViewModel) {
-      val otherOccupationInput = view.findViewById<EditText>(R.id.etOtherOccupation)
-      otherOccupationInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<EditText>(R.id.etOtherOccupation)
+      input.doOnTextChanged { text, start, before, count ->
         poll.OtherOccupation = text.toString()
         pollViewModel.updatePoll(poll)
+        validations.validateOtherOptionInput(
+          text.toString(),
+          view.findViewById(R.id.loOtherOccupation),
+          pollViewModel,
+          "OtherOccupation"
+        )
       }
     }
 
@@ -540,6 +584,7 @@ class PollProvider {
       val otherInput = view.findViewById<TextInputLayout>(R.id.loOtherMobilityMethod)
       bindSingleOptionWithOtherInput(
         context,
+        "MobilityMethod",
         data,
         pollViewModel,
         input,
@@ -554,6 +599,12 @@ class PollProvider {
       otherMobilityMethodInput.doOnTextChanged { text, start, before, count ->
         poll.OtherMobilityMethod = text.toString()
         pollViewModel.updatePoll(poll)
+        validations.validateOtherOptionInput(
+          text.toString(),
+          view.findViewById(R.id.loOtherMobilityMethod),
+          pollViewModel,
+          "OtherMobilityMethod"
+        )
       }
     }
 
@@ -565,16 +616,22 @@ class PollProvider {
     ) {
       val diseasesInput = view.findViewById<EditText>(R.id.etDiseases)
       val otherDiseasesInput = view.findViewById<TextInputLayout>(R.id.loOtherDiseases)
-      bindMultipleOptionsWithOtherInput(context, data, pollViewModel, diseasesInput, otherDiseasesInput) {
+      bindMultipleOptionsWithOtherInput(context, "Diseases", data, pollViewModel, diseasesInput, otherDiseasesInput) {
         poll.Diseases = it.map { it.id }
       }
     }
 
     fun bindOtherDiseasesInput(view: View, pollViewModel: PollViewModel) {
-      val otherDiseasesInput = view.findViewById<EditText>(R.id.etOtherDiseases)
-      otherDiseasesInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<EditText>(R.id.etOtherDiseases)
+      input.doOnTextChanged { text, start, before, count ->
         poll.OtherDiseases = text.toString()
         pollViewModel.updatePoll(poll)
+        validations.validateOtherOptionInput(
+          text.toString(),
+          view.findViewById(R.id.loOtherDiseases),
+          pollViewModel,
+          "OtherDiseases"
+        )
       }
     }
 
@@ -586,7 +643,7 @@ class PollProvider {
     ) {
       val federalSupportsInput = view.findViewById<EditText>(R.id.etFederalSupports)
       val otherFederalSupportsInput = view.findViewById<TextInputLayout>(R.id.loOtherFederalSupport)
-      bindMultipleOptionsWithOtherInput(context, data, pollViewModel, federalSupportsInput, otherFederalSupportsInput) {
+      bindMultipleOptionsWithOtherInput(context, "FederalSupports", data, pollViewModel, federalSupportsInput, otherFederalSupportsInput) {
         poll.FederalSupports = it.map { it.id }
       }
     }
@@ -596,6 +653,12 @@ class PollProvider {
       otherFederalSupport.doOnTextChanged { text, start, before, count ->
         poll.OtherFederalSupport = text.toString()
         pollViewModel.updatePoll(poll)
+        validations.validateOtherOptionInput(
+          text.toString(),
+          view.findViewById(R.id.loOtherFederalSupport),
+          pollViewModel,
+          "OtherFederalSupports"
+        )
       }
     }
 
@@ -607,16 +670,22 @@ class PollProvider {
     ) {
       val stateSupportsInput = view.findViewById<EditText>(R.id.etStateSupport)
       val otherStateSupportsInput = view.findViewById<TextInputLayout>(R.id.loOtherStateSupport)
-      bindMultipleOptionsWithOtherInput(context, data, pollViewModel, stateSupportsInput, otherStateSupportsInput) {
+      bindMultipleOptionsWithOtherInput(context, "StateSupports", data, pollViewModel, stateSupportsInput, otherStateSupportsInput) {
         poll.StateSupports = it.map { it.id }
       }
     }
 
     fun bindOtherStateSupportInput(view: View, pollViewModel: PollViewModel) {
-      val otherStateSupportInput = view.findViewById<EditText>(R.id.etOtherStateSupport)
-      otherStateSupportInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<EditText>(R.id.etOtherStateSupport)
+      input.doOnTextChanged { text, start, before, count ->
         poll.OtherStateSupport = text.toString()
         pollViewModel.updatePoll(poll)
+        validations.validateOtherOptionInput(
+          text.toString(),
+          view.findViewById(R.id.loOtherGovernmentInvitationActivityOrThemes),
+          pollViewModel,
+          "OtherStateSupports"
+        )
       }
     }
 
@@ -628,16 +697,22 @@ class PollProvider {
     ) {
       val municipalSupportsInput = view.findViewById<EditText>(R.id.etMunicipalSupport)
       val otherMunicipalSupportsInput = view.findViewById<TextInputLayout>(R.id.loOtherMunicipalSupport)
-      bindMultipleOptionsWithOtherInput(context, data, pollViewModel, municipalSupportsInput, otherMunicipalSupportsInput) {
+      bindMultipleOptionsWithOtherInput(context, "MunicipalSupports", data, pollViewModel, municipalSupportsInput, otherMunicipalSupportsInput) {
         poll.MunicipalSupports = it.map { it.id }
       }
     }
 
     fun bindOtherMunicipalSupportInput(view: View, pollViewModel: PollViewModel) {
-      val otherMunicipalSupportInput = view.findViewById<EditText>(R.id.etOtherMunicipalSupport)
-      otherMunicipalSupportInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<EditText>(R.id.etOtherMunicipalSupport)
+      input.doOnTextChanged { text, start, before, count ->
         poll.OtherMunicipalSupport = text.toString()
         pollViewModel.updatePoll(poll)
+        validations.validateOtherOptionInput(
+          text.toString(),
+          view.findViewById(R.id.loOtherMunicipalSupport),
+          pollViewModel,
+          "OtherMunicipalSupports"
+        )
       }
     }
 
@@ -649,16 +724,22 @@ class PollProvider {
     ) {
       val input = view.findViewById<EditText>(R.id.etHobbies)
       val otherInput = view.findViewById<TextInputLayout>(R.id.loOtherHobbies)
-      bindMultipleOptionsWithOtherInput(context, data, pollViewModel, input, otherInput) {
+      bindMultipleOptionsWithOtherInput(context, "Hobbies", data, pollViewModel, input, otherInput) {
         poll.Hobbies = it.map { it.id }
       }
     }
 
     fun bindOtherHobbiesInput(view: View, pollViewModel: PollViewModel) {
-      val otherHobbiesInput = view.findViewById<EditText>(R.id.etOtherHobbies)
-      otherHobbiesInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<EditText>(R.id.etOtherHobbies)
+      input.doOnTextChanged { text, start, before, count ->
         poll.OtherHobbies = text.toString()
         pollViewModel.updatePoll(poll)
+        validations.validateOtherOptionInput(
+          text.toString(),
+          view.findViewById(R.id.loOtherHobbies),
+          pollViewModel,
+          "OtherHobbies"
+        )
       }
     }
 
@@ -672,6 +753,7 @@ class PollProvider {
       val otherInput = view.findViewById<TextInputLayout>(R.id.loOtherReligion)
       bindSingleOptionWithOtherInput(
         context,
+        "Religion",
         data,
         pollViewModel,
         input,
@@ -686,6 +768,12 @@ class PollProvider {
       otherInput.doOnTextChanged { text, start, before, count ->
         poll.OtherReligion = text.toString()
         pollViewModel.updatePoll(poll)
+        validations.validateOtherOptionInput(
+          text.toString(),
+          view.findViewById(R.id.loOtherReligion),
+          pollViewModel,
+          "OtherReligion"
+        )
       }
     }
 
@@ -697,7 +785,7 @@ class PollProvider {
     ) {
       val input = view.findViewById<EditText>(R.id.etSports)
       val otherInput = view.findViewById<TextInputLayout>(R.id.loOtherSport)
-      bindMultipleOptionsWithOtherInput(context, data, pollViewModel, input, otherInput) {
+      bindMultipleOptionsWithOtherInput(context, "Sports", data, pollViewModel, input, otherInput) {
         poll.Sports = it.map { it.id }
       }
     }
@@ -707,6 +795,12 @@ class PollProvider {
       otherInput.doOnTextChanged { text, start, before, count ->
         poll.OtherSport = text.toString()
         pollViewModel.updatePoll(poll)
+        validations.validateOtherOptionInput(
+          text.toString(),
+          view.findViewById(R.id.loOtherGovernmentInvitationActivityOrThemes),
+          pollViewModel,
+          "OtherSports"
+        )
       }
     }
 
@@ -763,18 +857,25 @@ class PollProvider {
       data: List<Option>,
       pollViewModel: PollViewModel,
     ) {
+      Log.v("PETTYPES", data.toString())
       val input = view.findViewById<EditText>(R.id.etPetType)
       val otherInput = view.findViewById<TextInputLayout>(R.id.loOtherPetType)
-      bindMultipleOptionsWithOtherInput(context, data, pollViewModel, input, otherInput) {
+      bindMultipleOptionsWithOtherInput(context, "PetTypes", data, pollViewModel, input, otherInput) {
         poll.PetTypes = it.map { it.id }
       }
     }
 
     fun bindOtherPetTypeInput(view: View, pollViewModel: PollViewModel) {
-      val otherInput = view.findViewById<EditText>(R.id.etOtherPetType)
-      otherInput.doOnTextChanged { text, start, before, count ->
+      val input = view.findViewById<EditText>(R.id.etOtherPetType)
+      input.doOnTextChanged { text, start, before, count ->
         poll.OtherPetType = text.toString()
         pollViewModel.updatePoll(poll)
+        validations.validateOtherOptionInput(
+          text.toString(),
+          view.findViewById(R.id.loOtherPetType),
+          pollViewModel,
+          "OtherPetTypes"
+        )
       }
     }
 
@@ -786,7 +887,7 @@ class PollProvider {
     ) {
       val input = view.findViewById<EditText>(R.id.etGovernmentInvitationActivityOrThemes)
       val otherInput = view.findViewById<TextInputLayout>(R.id.loOtherGovernmentInvitationActivityOrThemes)
-      bindMultipleOptionsWithOtherInput(context, data, pollViewModel, input, otherInput) {
+      bindMultipleOptionsWithOtherInput(context, "GovernmentInvitationActivityOrThemes", data, pollViewModel, input, otherInput) {
         poll.GovernmentInvitationActivityOrThemes = it.map { it.id }
       }
     }
@@ -796,6 +897,12 @@ class PollProvider {
       otherInput.doOnTextChanged { text, start, before, count ->
         poll.OtherGovernmentInvitationActivityOrTheme = text.toString()
         pollViewModel.updatePoll(poll)
+        validations.validateOtherOptionInput(
+          text.toString(),
+          view.findViewById(R.id.loOtherGovernmentInvitationActivityOrThemes),
+          pollViewModel,
+          "OtherGovernmentInvitationActivityOrThemes"
+        )
       }
     }
 
@@ -852,8 +959,16 @@ class PollProvider {
       }
     }
 
-    fun sendPoll(pollViewModel: PollViewModel) {
-      pollViewModel.sendPoll(poll)
+    fun clearPoll(pollViewModel: PollViewModel) {
+      Log.v("POLL", "CLEAR POLL")
+      poll = Poll()
+      pollViewModel.updatePoll(poll)
+    }
+
+    fun sendPoll(pollViewModel: PollViewModel, foliumId: Int, activity: FragmentActivity?) {
+      poll.CreatedByFolium = foliumId
+      pollViewModel.sendPoll(poll, activity)
+      clearPoll(pollViewModel)
     }
   }
 }

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:paddingLeft="15dp"
+  android:paddingRight="15dp"
+  android:paddingTop="20dp"
+  tools:context=".views.LeaderPollsActivity">
+
+  <TextView
+    android:id="@+id/txtListTitle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Encuestados de Lider"
+    android:textColor="@color/purple_500"
+    android:textSize="20sp"
+    android:textStyle="bold" />
+
+  <Button
+    android:id="@+id/btnCreateStruct"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:visibility="gone"
+    android:text="NUEVA ENCUESTA VINCULADA" />
+
+  <TextView
+    android:id="@+id/txtNoData"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Aun no hay encuestados"
+    android:layout_marginTop="10dp"
+    android:visibility="gone"
+    android:textSize="15sp"
+    android:textStyle="bold" />
+
+  <ScrollView
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    tools:ignore="SpeakableTextPresentCheck">
+
+    <RelativeLayout
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_weight="1"
+      android:orientation="vertical">
+
+      <LinearLayout
+        android:id="@+id/listHeader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+          android:id="@+id/textView5"
+          android:layout_width="100dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:textStyle="bold"
+          android:text="Fecha" />
+
+        <TextView
+          android:id="@+id/textView6"
+          android:layout_width="80dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:textStyle="bold"
+          android:text="Nombre" />
+      </LinearLayout>
+
+      <ListView
+        android:id="@+id/rvLeaderPolls"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:layout_weight="1"
+        android:layout_marginTop="15dp" />
+
+    </RelativeLayout>
+  </ScrollView>
+
+</LinearLayout>
